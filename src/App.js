@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import { Switch, Route, BrowserRouter  } from 'react-router-dom';
+
+import theme from './static/styles/theme';
+import GlobalStyle from "./static/styles/globalStyles";
+import OriginalDumpSizePage from './components/pages/OriginalDumpSizePage';
+import CriticalStatusesPage from "./components/pages/CriticalStatusesPage";
+import TableCallsStatsPage from "./components/pages/TableCallsStatsPage";
+import ConfigurationPage from "./components/pages/ConfigurationPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <GlobalStyle/>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={OriginalDumpSizePage}/>
+            <Route path='/critical-statuses' component={CriticalStatusesPage}/>
+            <Route path='/tables' component={TableCallsStatsPage}/>
+            <Route path='/configuration' component={ConfigurationPage} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
   );
 }
 

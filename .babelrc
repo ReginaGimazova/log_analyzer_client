@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    ["styled-components"],
+    ["module-resolver", {"root": ["./"]}]
+  ]
+}
