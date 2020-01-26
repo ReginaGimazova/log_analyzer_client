@@ -4,7 +4,6 @@ import Button from "../../atoms/Button";
 
 const Form = styled.form`
   padding: 50px 20px;
-  width: 80%;
 `;
 
 const ConfigurationForm = () => {

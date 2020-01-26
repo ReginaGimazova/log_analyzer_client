@@ -7,10 +7,10 @@ const AsideMenu = () => {
   return (
     <AsideMenuWrapper>
       <Menu>
-        <Link to='/' activeClassName="active">Original dump size</Link>
-        <Link to='/critical-statuses' activeClassName="active">Critical statuses</Link>
-        <Link to='/tables' activeClassName="active">Table calls stats</Link>
-        <Link to='/configuration' activeClassName="active">Сonfiguration</Link>
+        <Link to='/' activeclassname="active">Original dump analyze</Link>
+        <Link to='/critical-statuses' activeclassname="active">Critical statuses</Link>
+        <Link to='/tables' activeclassname="active">Table calls stats</Link>
+        <Link to='/configuration' activeclassname="active">Сonfiguration</Link>
       </Menu>
     </AsideMenuWrapper>
   )
