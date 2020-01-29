@@ -20,10 +20,6 @@ const Main = styled.main`
   flex-direction: column;
   min-height: inherit;
   width: 100%;
-  padding: 50px;
-    @media screen and (min-width: 768px) {
-      margin-left: 20%;
-    }
 `;
 
 const MainTemplate = ({children}) => (
