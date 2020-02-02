@@ -5,7 +5,9 @@
   "dependencies": {
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
+    "bootstrap": "^4.4.1",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-burger-menu": "^2.6.13",
     "react-dom": "^16.12.0",
     "react-router": "^5.1.2",
@@ -35,10 +37,10 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^4.0.0",
-    "babel-plugin-styled-components": "^1.10.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2"
+    "@testing-library/user-event": "^7.1.2",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-styled-components": "^1.10.6"
   }
 }

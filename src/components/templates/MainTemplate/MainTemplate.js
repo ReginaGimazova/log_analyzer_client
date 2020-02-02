@@ -25,9 +25,9 @@ const Main = styled.main`
 const MainTemplate = ({children}) => (
   <Wrapper>
     <Header/>
-    <PageContent>
+    <PageContent id='outer-container'>
       <AsideMenu/>
-      <Main>
+      <Main id='page-wrap'>
         {children}
       </Main>
     </PageContent>
