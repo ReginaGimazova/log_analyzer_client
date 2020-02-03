@@ -1,17 +1,17 @@
 const theme = {
   colors: {
     lightGrey: '#dedede',
+    grey: '#9f9f9f',
     darkGrey: '#5c5b5b',
     black: '#000',
     white: '#fff',
     green: '#92ac6d',
   },
   breakpoints: {
-    xs: '500px',
-    sm: '700px',
+    sm: '576px',
     md: '768px',
-    lg: '900px',
-    xl: '1100px',
+    lg: '992px',
+    xl: '1200px',
   },
 };
 

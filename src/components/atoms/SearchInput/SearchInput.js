@@ -1,39 +1,53 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import InputBase from "@material-ui/core/InputBase";
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import styled from "styled-components";
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import { MdSearch } from 'react-icons/md';
+import Button from "../Button";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: '0 10px',
-    margin: '20px 0',
-    display: 'flex',
-    alignItems: 'center',
-    width: '40%',
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
-  },
-  input: {
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-}));
+const InputWrapper = styled(InputGroup)`
+  width: 50%;
+  margin-top: 20px;
+  
+  @media all and (max-width: ${({theme}) => theme.breakpoints.md}){
+    width: 100%;
+  }
+`;
+
+const Input = styled(FormControl)`
+  font-size: 1rem;
+`;
+
+const Icon = styled(MdSearch)`
+  width: 1.6rem;
+  height: 1.6rem;
+  fill: ${({theme}) => theme.colors.darkGrey};
+`;
+
+const SearchButton = styled.button(({theme}) => `
+  display: flex;
+  align-items: center;
+  background-color: ${theme.colors.lightGrey};
+  width: 2.5rem;
+  justify-content: center;
+  border-radius: 0 3px 3px 0;
+  
+   &:hover, &:focus, &:active {
+    background-color: ${theme.colors.lightGrey};
+  }
+ 
+`);
 
 const SearchInput = () => {
-  const classes = useStyles();
-  
   return (
-    <Paper component="form" className={classes.root}>
-    <InputBase className={classes.input} placeholder="Search by table name"/>
-    <IconButton className={classes.iconButton} type="submit" aria-label="search">
-      <SearchIcon />
-    </IconButton>
-    </Paper>
+    <InputWrapper>
+      <Input
+        placeholder="Search tables"
+      />
+      <SearchButton>
+        <Icon />
+      </SearchButton>
+    </InputWrapper>
   )
 };
 

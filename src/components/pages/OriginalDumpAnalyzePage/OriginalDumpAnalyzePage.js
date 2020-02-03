@@ -9,7 +9,7 @@ import Pagination from "../../molecules/Pagination";
 const PageContent = styled.div`
   padding: 0 50px;
   
-   @media all and (max-width: 600px){
+   @media all and (max-width: ${({theme}) => theme.breakpoints.md}){
      padding: 0 10px;
   }
 `;

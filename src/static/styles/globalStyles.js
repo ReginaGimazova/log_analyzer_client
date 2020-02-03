@@ -39,12 +39,12 @@ const GlobalStyle = createGlobalStyle`
   
   a, button {
     cursor: pointer;
+    outline: none;
   }
   
   a {
     text-decoration: none;
     transition: all .25s ease-in-out 0s;
-    outline: none;
     color: ${({ theme }) => theme.colors.black};
   }
   
@@ -53,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     border: none;
-    outline: 0;
     text-transform: uppercase;
    
     &:disabled {

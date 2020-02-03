@@ -1,5 +1,4 @@
 import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
 import styled from "styled-components";
 
 import Button from "../../atoms/Button";
@@ -16,19 +15,30 @@ const Navigation = styled.div`
     width: 100%;
   }
 `;
-const useStyles = makeStyles(theme => ({
-  button: {
-    padding: '10px 20px',
-    marginRight: '30px',
-    [theme.breakpoints.down('sm')]: {
-     marginTop: '10px',
-     marginRight: 0
-    },
+
+const NavigationButton = styled(Button)(({theme}) => `
+  padding: 10px 20px;
+  background-color: ${theme.colors.grey};
+  
+  &:first-child{
+    margin-right: 30px;
   }
-}));
+  
+  @media all and (max-width: ${theme.breakpoints.md}){
+     &:first-child{
+       margin-right: 0;
+       margin-bottom: 10px;
+     }
+  }
+  
+  &:hover {
+    background-color: ${theme.colors.darkGrey};
+  }
+  
+
+`);
 
 const NavigationMenu = ({setIsBySql}) => {
-  const styles = useStyles();
   const onSqlChoose = () => {
     setIsBySql(true);
   };
@@ -39,8 +49,8 @@ const NavigationMenu = ({setIsBySql}) => {
   
   return (
     <Navigation>
-      <Button onClick={onSqlChoose} className={styles.button}> grouped by sql</Button>
-      <Button onClick={onSqlUserHostChoose} className={styles.button}> grouped by sql and user host</Button>
+      <NavigationButton onClick={onSqlChoose}> grouped by sql</NavigationButton>
+      <NavigationButton onClick={onSqlUserHostChoose}> grouped by sql and user host</NavigationButton>
     </Navigation>
   )
 };
