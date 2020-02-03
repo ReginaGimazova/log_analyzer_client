@@ -5,6 +5,7 @@ const Title = styled.h1`
   text-transform: uppercase;
   font-weight: normal;
   font-size: 28px;
+  margin-bottom: 30px;
 `;
 
 const PageTitle = ({children}) => (

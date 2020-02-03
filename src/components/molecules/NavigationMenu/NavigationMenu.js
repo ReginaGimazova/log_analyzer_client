@@ -7,7 +7,7 @@ const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   width: max-content;
-  margin: 30px 0;
+  margin-bottom: 30px;
   
   @media all and (max-width: ${({theme}) => theme.breakpoints.sm}){
     flex-direction: column;

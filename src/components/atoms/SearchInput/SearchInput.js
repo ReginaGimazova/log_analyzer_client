@@ -6,7 +6,6 @@ import { MdSearch } from 'react-icons/md';
 
 const InputWrapper = styled(InputGroup)`
   width: 50%;
-  margin-top: 20px;
   
   @media all and (max-width: ${({theme}) => theme.breakpoints.md}){
     width: 100%;
