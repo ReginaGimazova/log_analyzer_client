@@ -1,12 +1,10 @@
 import React from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import ConfigurationForm from "../../organisms/ConfigurationForm";
-import PageTitle from "../../atoms/PageTitle";
 
 const ConfigurationPage = () => {
   return (
-    <MainTemplate>
-      <PageTitle>Configuration</PageTitle>
+    <MainTemplate pageTitle='Configuration'>
       <ConfigurationForm/>
     </MainTemplate>
   )

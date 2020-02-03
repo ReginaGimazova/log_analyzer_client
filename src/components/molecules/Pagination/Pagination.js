@@ -5,6 +5,10 @@ import PaginationComponent from "react-bootstrap/Pagination";
 const PaginationWrapper = styled(PaginationComponent)`
   width: max-content;
   margin: 50px auto;
+  
+  @media all and (max-width: ${({theme}) => theme.breakpoints.sm}){
+    margin-left: -20px;
+  }
 `;
 
 const PaginationItem = styled(PaginationComponent.Item)(({theme}) => `

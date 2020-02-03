@@ -3,7 +3,6 @@ import styled from "styled-components";
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import { MdSearch } from 'react-icons/md';
-import Button from "../Button";
 
 const InputWrapper = styled(InputGroup)`
   width: 50%;
