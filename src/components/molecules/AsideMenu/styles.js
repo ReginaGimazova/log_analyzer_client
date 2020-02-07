@@ -29,6 +29,8 @@ export const AsideMenuWrapper = styled.div`
       &:hover, &:visited {
         background-color: rgba(66,112,145,0.17);
         border-left: 4px solid #304960;
+        color: ${({theme}) => theme.colors.black};
+        text-decoration: none;
       }
     };
 

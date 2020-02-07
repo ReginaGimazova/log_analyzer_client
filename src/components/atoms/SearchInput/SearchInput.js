@@ -14,6 +14,12 @@ const InputWrapper = styled(InputGroup)`
 
 const Input = styled(FormControl)`
   font-size: 1rem;
+  border-color: ${({theme}) => theme.colors.lightGrey};
+  
+  &:focus {
+    border-color: ${({theme}) => theme.colors.lightGrey};
+    box-shadow: none;
+  }
 `;
 
 const Icon = styled(MdSearch)`
