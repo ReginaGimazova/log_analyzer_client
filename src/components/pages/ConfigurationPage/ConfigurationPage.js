@@ -1,6 +1,6 @@
 import React from "react";
 import MainTemplate from "../../templates/MainTemplate";
-import ConfigurationForm from "../../organisms/ConfigurationForm";
+import ConfigurationForm from "./ConfigurationForm";
 
 const ConfigurationPage = () => {
   return (

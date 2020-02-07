@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import StatusList from "../StatusList";
 
 const List = styled.ul`
   margin-top: 3rem;
@@ -13,16 +14,16 @@ const ListItem = styled.li`
 `;
 
 const Text = styled.span`
-    display: block;
-    margin: 0 80px 0 20px;
-    line-height: 24px;
-    text-align: justify;
+  display: block;
+  margin: 0 80px 0 20px;
+  line-height: 24px;
+  text-align: justify;
 
-    ${({isOpen}) => !isOpen && `
-     white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    `};
+  ${({isOpen}) => !isOpen && `
+   white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  `};
 `;
 
 const Triangle = styled.span`
@@ -51,7 +52,7 @@ const Count = styled.span`
   color: ${({theme}) => theme.colors.green};
 `;
 
-const QueriesList = ({children}) => {
+const QueriesList = ({queries, isAnalyzerPage}) => {
   const [openItems, setOpenItems] = useState([undefined]);
   
   const onOpenRequest = (index) => {
@@ -66,15 +67,24 @@ const QueriesList = ({children}) => {
   return (
     <List>
       <ListHeader>
-        <span>20 Queries</span>
-        <span>Execution counts</span>
+        <span>{queries.length} Queries</span>
+        {isAnalyzerPage && (
+          <span>Execution counts</span>
+        )}
       </ListHeader>
-      {children.map((item, index) => (
-        <ListItem key={index} isOpen={openItems.includes(index)}>
-          <Triangle isOpen={openItems.includes(index)} onClick={() => onOpenRequest(index)}/>
-          <Text isOpen={openItems.includes(index)} >{item}</Text>
-          <Count>20</Count>
-        </ListItem>
+      {queries.map((item, index) => (
+        <div key={index}>
+          <ListItem isOpen={openItems.includes(index)}>
+            <Triangle isOpen={openItems.includes(index)} onClick={() => onOpenRequest(index)}/>
+            <Text isOpen={openItems.includes(index)} >{item.query_text}</Text>
+            {isAnalyzerPage && (
+              <Count>{queries.length}</Count>
+            )}
+          </ListItem>
+          {!isAnalyzerPage && (
+            <StatusList statuses={item.critical_statuses}/>
+          )}
+        </div>
       ))}
     </List>
   )

@@ -1,6 +1,7 @@
 import React from "react";
-import MainTemplate from "../../templates/MainTemplate";
-import StatusesPageSection from "./StatusesPageSection";
+import QueriesList from "../../../molecules/QueriesList";
+import Subtitle from "../../../atoms/Subtitle/Subtitle";
+import SearchInput from "../../../atoms/SearchInput/SearchInput";
 
 const queries = [
   {
@@ -27,12 +28,14 @@ const queries = [
   }
 ];
 
-const CriticalStatusesPage = () => {
+const SqlAnalyzeSection = () => {
   return (
-    <MainTemplate pageTitle='Critical statuses'>
-      <StatusesPageSection queries={queries}/>
-    </MainTemplate>
+    <section>
+      <Subtitle>Parametrized statements grouped by SQL </Subtitle>
+      <SearchInput/>
+      <QueriesList isAnalyzerPage={true} queries={queries}/>
+    </section>
   )
 };
 
-export default CriticalStatusesPage;
+export default SqlAnalyzeSection;

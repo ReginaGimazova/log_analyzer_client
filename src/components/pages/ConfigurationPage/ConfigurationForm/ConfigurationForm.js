@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import Form from 'react-bootstrap/Form';
-import Subtitle from "../../atoms/Subtitle/Subtitle";
+import Subtitle from "../../../atoms/Subtitle/Subtitle";
 import {Button} from "react-bootstrap";
 
 const Input = styled(Form.Control)`

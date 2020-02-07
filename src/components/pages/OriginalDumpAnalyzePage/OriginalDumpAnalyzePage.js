@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import MainTemplate from "../../templates/MainTemplate";
-import SqlAnalyzeSection from "../../organisms/SqlAnalyzeSection";
+import SqlAnalyzeSection from "./SqlAnalyzeSection";
 import NavigationMenu from "../../molecules/NavigationMenu";
 import Pagination from "../../molecules/Pagination";
 
