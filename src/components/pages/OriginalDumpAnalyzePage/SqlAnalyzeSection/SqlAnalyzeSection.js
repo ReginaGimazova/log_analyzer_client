@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import QueriesList from "../../../molecules/QueriesList";
 import Subtitle from "../../../atoms/Subtitle/Subtitle";
 import SearchInput from "../../../atoms/SearchInput/SearchInput";
@@ -28,13 +29,17 @@ const queries = [
   }
 ];
 
+const Section = styled.section`
+  margin: 50px 0;
+`;
+
 const SqlAnalyzeSection = () => {
   return (
-    <section>
+    <Section>
       <Subtitle>Parametrized statements grouped by SQL </Subtitle>
       <SearchInput/>
       <QueriesList isAnalyzerPage={true} queries={queries}/>
-    </section>
+    </Section>
   )
 };
 

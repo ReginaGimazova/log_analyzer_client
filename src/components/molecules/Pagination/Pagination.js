@@ -6,9 +6,7 @@ const PaginationWrapper = styled(PaginationComponent)`
   width: max-content;
   margin: 50px auto;
   
-  @media all and (max-width: ${({theme}) => theme.breakpoints.sm}){
-    margin-left: -20px;
-  }
+ 
 `;
 
 const PaginationItem = styled(PaginationComponent.Item)(({theme}) => `
@@ -22,11 +20,19 @@ const PaginationItem = styled(PaginationComponent.Item)(({theme}) => `
     &:hover {
       color: ${theme.colors.black}
     }
+    
+    @media all and (max-width: ${theme.breakpoints.sm}){
+      padding: .5rem;
+    }
   };
   
   &.active .page-link {
     background-color: ${theme.colors.green};
     border-color: ${theme.colors.green};
+    
+    @media all and (max-width: ${theme.breakpoints.sm}){
+      padding: .5rem;
+    }
   }
 `);
 
@@ -40,6 +46,10 @@ const PaginationPrev = styled(PaginationComponent.Prev)(({theme}) => `
     &:hover {
       color: ${theme.colors.black}
     }
+    
+    @media all and (max-width: ${theme.breakpoints.sm}){
+      padding: .5rem;
+    }
   }
 `);
 
@@ -52,17 +62,24 @@ const PaginationNext = styled(PaginationComponent.Next)(({theme}) => `
     &:hover {
       color: ${theme.colors.black}
     }
+    
+    @media all and (max-width: ${theme.breakpoints.sm}){
+      padding: .5rem;
+    }
   }
 `);
 
-const Ellipsis = styled(PaginationComponent.Ellipsis)`
+const Ellipsis = styled(PaginationComponent.Ellipsis)(({theme}) => `
   a {
-    color: ${({theme}) => theme.colors.darkGrey};
+    color: ${theme.colors.darkGrey};
      &:focus{
       box-shadow: none;
     }
+    @media all and (max-width: ${theme.breakpoints.sm}){
+      padding: .5rem;
+    }
   }
-`;
+`);
 
 const Pagination = ({pages = 20}) => {
   return (
@@ -72,6 +89,7 @@ const Pagination = ({pages = 20}) => {
       
       <Ellipsis />
   
+      <PaginationItem>{pages / 2 - 1}</PaginationItem>
       <PaginationItem>{pages / 2}</PaginationItem>
       <PaginationItem active>{pages / 2 + 1}</PaginationItem>
   
