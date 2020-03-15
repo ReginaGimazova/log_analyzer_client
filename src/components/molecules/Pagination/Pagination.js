@@ -1,15 +1,14 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import PaginationComponent from "react-bootstrap/Pagination";
 
 const PaginationWrapper = styled(PaginationComponent)`
   width: max-content;
   margin: 50px auto;
-  
- 
 `;
 
-const PaginationItem = styled(PaginationComponent.Item)(({theme}) => `
+const PaginationItem = styled(PaginationComponent.Item)(
+  ({ theme }) => `
   a {
     color: ${theme.colors.darkGrey};
     
@@ -34,9 +33,11 @@ const PaginationItem = styled(PaginationComponent.Item)(({theme}) => `
       padding: .5rem;
     }
   }
-`);
+`
+);
 
-const PaginationPrev = styled(PaginationComponent.Prev)(({theme}) => `
+const PaginationPrev = styled(PaginationComponent.Prev)(
+  ({ theme }) => `
   a {
     color: ${theme.colors.darkGrey};
     
@@ -51,9 +52,11 @@ const PaginationPrev = styled(PaginationComponent.Prev)(({theme}) => `
       padding: .5rem;
     }
   }
-`);
+`
+);
 
-const PaginationNext = styled(PaginationComponent.Next)(({theme}) => `
+const PaginationNext = styled(PaginationComponent.Next)(
+  ({ theme }) => `
   a {
     color: ${theme.colors.darkGrey};
     &:focus {
@@ -67,9 +70,11 @@ const PaginationNext = styled(PaginationComponent.Next)(({theme}) => `
       padding: .5rem;
     }
   }
-`);
+`
+);
 
-const Ellipsis = styled(PaginationComponent.Ellipsis)(({theme}) => `
+const Ellipsis = styled(PaginationComponent.Ellipsis)(
+  ({ theme }) => `
   a {
     color: ${theme.colors.darkGrey};
      &:focus{
@@ -79,26 +84,27 @@ const Ellipsis = styled(PaginationComponent.Ellipsis)(({theme}) => `
       padding: .5rem;
     }
   }
-`);
+`
+);
 
-const Pagination = ({pages = 20}) => {
+const Pagination = ({ pages = 20 }) => {
   return (
     <PaginationWrapper>
       <PaginationPrev />
       <PaginationItem>{1}</PaginationItem>
-      
+
       <Ellipsis />
-  
+
       <PaginationItem>{pages / 2 - 1}</PaginationItem>
       <PaginationItem>{pages / 2}</PaginationItem>
       <PaginationItem active>{pages / 2 + 1}</PaginationItem>
-  
+
       <Ellipsis />
-      
+
       <PaginationItem>{pages}</PaginationItem>
       <PaginationNext />
     </PaginationWrapper>
-  )
+  );
 };
 
 export default Pagination;

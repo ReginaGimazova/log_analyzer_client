@@ -16,7 +16,8 @@ const PageContent = styled.div`
   min-height: inherit;
 `;
 
-const Main = styled.main(({theme}) =>`
+const Main = styled.main(
+  ({ theme }) => `
   display: flex;
   flex-direction: column;
   min-height: inherit;
@@ -26,14 +27,15 @@ const Main = styled.main(({theme}) =>`
   @media all and (max-width: ${theme.breakpoints.md}){
     padding: 30px 30px 0;
   }
-`);
+`
+);
 
-const MainTemplate = ({children, pageTitle}) => (
+const MainTemplate = ({ children, pageTitle }) => (
   <Wrapper>
-    <Header/>
-    <PageContent id='outer-container'>
-      <AsideMenu/>
-      <Main id='page-wrap'>
+    <Header />
+    <PageContent id="outer-container">
+      <AsideMenu />
+      <Main id="page-wrap">
         <PageTitle>{pageTitle}</PageTitle>
         {children}
       </Main>

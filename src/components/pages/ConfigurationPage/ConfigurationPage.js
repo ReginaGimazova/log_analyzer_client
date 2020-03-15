@@ -4,10 +4,10 @@ import ConfigurationForm from "./ConfigurationForm";
 
 const ConfigurationPage = () => {
   return (
-    <MainTemplate pageTitle='Configuration'>
-      <ConfigurationForm/>
+    <MainTemplate pageTitle="Configuration">
+      <ConfigurationForm />
     </MainTemplate>
-  )
+  );
 };
 
 export default ConfigurationPage;

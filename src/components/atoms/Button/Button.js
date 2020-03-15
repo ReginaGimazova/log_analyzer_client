@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import {darken} from 'polished';
+import { darken } from "polished";
 
-const MyButton = styled.button(({theme: {colors}, color = colors.grey, active}) =>`
+const MyButton = styled.button(
+  ({ theme: { colors }, color = colors.grey, active }) => `
   border: none;
   width: max-content;
   min-width: 150px;
@@ -13,9 +14,10 @@ const MyButton = styled.button(({theme: {colors}, color = colors.grey, active}) 
   &:hover, &:focus, &:active {
     background-color: ${darken(0.2, color)};
   }
-`);
+`
+);
 
-const Button = ({children, onClick, className, active, color}) => {
+const Button = ({ children, onClick, className, active, color }) => {
   return (
     <MyButton
       onClick={onClick}
@@ -25,7 +27,7 @@ const Button = ({children, onClick, className, active, color}) => {
     >
       {children}
     </MyButton>
-  )
+  );
 };
 
 export default Button;

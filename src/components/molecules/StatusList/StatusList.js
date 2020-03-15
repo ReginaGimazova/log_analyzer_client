@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const List = styled.ul`
@@ -7,11 +7,12 @@ const List = styled.ul`
 
 const Item = styled.li`
   display: inline-block;
-  color: ${({theme}) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.red};
   font-weight: bold;
 `;
 
-const Icon = styled.span(({theme}) => `
+const Icon = styled.span(
+  ({ theme }) => `
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -23,19 +24,20 @@ const Icon = styled.span(({theme}) => `
   border-radius: 50%;
   color: ${theme.colors.red};
   font-weight: bold;
-`);
+`
+);
 
-const StatusList = ({statuses}) => {
+const StatusList = ({ statuses }) => {
   return (
     <List>
-      {statuses.map((status) => (
+      {statuses.map(status => (
         <Item key={status.id}>
           <Icon>!</Icon>
           {status.name}
         </Item>
       ))}
     </List>
-  )
+  );
 };
 
 export default StatusList;

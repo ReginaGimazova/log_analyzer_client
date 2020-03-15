@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 const Label = styled.label`
   display: flex;
   position: relative;
@@ -29,7 +29,7 @@ const DefaultCheckbox = styled.input(
       border: 0.0625rem solid ${colors.red};
     }
   }
-`,
+`
 );
 
 const CustomCheckbox = styled.span`
@@ -46,7 +46,13 @@ const CustomCheckbox = styled.span`
 
 const Checkbox = ({ onChange, value, checked, children, id }) => (
   <Label htmlFor={id}>
-    <DefaultCheckbox type="checkbox" onChange={onChange} value={value} checked={checked} id={id} />
+    <DefaultCheckbox
+      type="checkbox"
+      onChange={onChange}
+      value={value}
+      checked={checked}
+      id={id}
+    />
     <CustomCheckbox checked={checked} />
     {children}
   </Label>

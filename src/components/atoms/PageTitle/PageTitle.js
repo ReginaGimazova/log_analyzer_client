@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Title = styled.h1`
@@ -8,8 +8,6 @@ const Title = styled.h1`
   margin-bottom: 30px;
 `;
 
-const PageTitle = ({children}) => (
-  <Title>{children}</Title>
-);
+const PageTitle = ({ children }) => <Title>{children}</Title>;
 
 export default PageTitle;
