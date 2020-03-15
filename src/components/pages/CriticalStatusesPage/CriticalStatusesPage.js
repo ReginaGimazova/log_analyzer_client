@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "./StatusesPageSection";
+import NavigationMenu from "../../molecules/NavigationMenu";
 
 const queries = [
   {
@@ -27,10 +28,32 @@ const queries = [
   }
 ];
 
+const types = {
+  EXPLAIN: 'EXPLAIN',
+  PROFILE: 'PROFILE'
+};
+
 const CriticalStatusesPage = () => {
+  const [currentType, setCurrentType] = useState(types.EXPLAIN);
+
+  const menuItems = [
+    {
+      title: 'Show Explain statuses',
+      active: currentType === types.EXPLAIN,
+      onClick: () => setCurrentType(types.EXPLAIN)
+
+    },
+    {
+      title: 'Show Profile statuses',
+      active: currentType === types.PROFILE,
+      onClick: () => setCurrentType(types.PROFILE)
+    }
+  ];
+
   return (
     <MainTemplate pageTitle='Critical statuses'>
-      <StatusesPageSection queries={queries}/>
+      <NavigationMenu menuItems={menuItems}/>
+      <StatusesPageSection queries={queries} type={currentType}/>
     </MainTemplate>
   )
 };

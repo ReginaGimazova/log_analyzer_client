@@ -1,7 +1,8 @@
 import React from "react";
+import {withTheme} from "styled-components";
 import {BarChart, Bar, XAxis, ResponsiveContainer, LabelList, Tooltip, CartesianGrid, Cell, YAxis} from 'recharts';
 
-const TableStats = ({data}) => {
+const TableStats = ({data, theme}) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -15,16 +16,15 @@ const TableStats = ({data}) => {
         />
         <XAxis type='number' />
         <YAxis type='category' tick={false} dataKey='name' />
-        <Tooltip />
+        <Tooltip cursor={{fill: theme.colors.lightGrey}} />
         <Bar
           maxBarSize={30}
           dataKey='call_count'
-          fill='#92ac6d'
         >
           <LabelList position="right" dataKey='name'/>
           {
             data.map((table, index) => (
-              <Cell key={index} fill={table.call_count > 20 ? '#a56a6b' : '#92ac6d'} />
+              <Cell key={index} fill={table.call_count > 20 ? theme.colors.lightRed : theme.colors.green} />
             ))
           }
         </Bar>
@@ -33,4 +33,4 @@ const TableStats = ({data}) => {
   )
 };
 
-export default TableStats;
+export default withTheme(TableStats);

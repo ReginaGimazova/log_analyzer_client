@@ -15,42 +15,27 @@ const Navigation = styled.div`
   }
 `;
 
-const NavigationButton = styled(Button)(({theme}) => `
+const NavigationButton = styled(Button)(({theme: {breakpoints}}) => `
   padding: 10px 20px;
-  background-color: ${theme.colors.grey};
   
   &:first-child{
     margin-right: 30px;
   }
   
-  @media all and (max-width: ${theme.breakpoints.sm}){
+  @media all and (max-width: ${breakpoints.sm}){
      &:first-child{
        margin-right: 0;
        margin-bottom: 10px;
      }
-  }
-  
-  &:hover {
-    background-color: ${theme.colors.darkGrey};
-  }
- 
+  } 
 `);
 
-const NavigationMenu = ({setIsBySql}) => {
-  const onSqlChoose = () => {
-    setIsBySql(true);
-  };
-  
-  const onSqlUserHostChoose = () => {
-    setIsBySql(false)
-  };
-  
-  return (
-    <Navigation>
-      <NavigationButton onClick={onSqlChoose}> grouped by sql</NavigationButton>
-      <NavigationButton onClick={onSqlUserHostChoose}> grouped by sql and user host</NavigationButton>
-    </Navigation>
-  )
-};
+const NavigationMenu = ({menuItems}) => (
+  <Navigation>
+    {menuItems.map(({title, onClick, active}, index) => (
+      <NavigationButton key={index} onClick={onClick} active={active}>{title}</NavigationButton>
+    ))}
+  </Navigation>
+);
 
 export default NavigationMenu;

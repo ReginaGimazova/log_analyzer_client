@@ -6,10 +6,22 @@ import Pagination from "../../molecules/Pagination";
 
 const OriginalDumpAnalyzePage = () => {
   const [isBySql, setIsBySql] = useState(true);
-  
+  const menuItems = [
+    {
+      title: 'grouped by sql',
+      active: isBySql,
+      onClick: () => setIsBySql(true)
+    },
+    {
+      title: 'grouped by sql and user host',
+      active: !isBySql,
+      onClick: () => setIsBySql(false)
+    }
+  ];
+
   return (
     <MainTemplate pageTitle='Original dump analyze'>
-      <NavigationMenu setIsBySql={setIsBySql}/>
+      <NavigationMenu menuItems={menuItems}/>
       <div>
         {isBySql ? (
           <SqlAnalyzeSection/>

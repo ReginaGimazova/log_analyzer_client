@@ -1,16 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import Form from 'react-bootstrap/Form';
+import React, {useState} from "react";
+import styled, {withTheme} from "styled-components";
 import Subtitle from "../../../atoms/Subtitle/Subtitle";
-import {Button} from "react-bootstrap";
-
-const Input = styled(Form.Control)`
-  width: ${({size}) => size === 'small' ? '100px' : '300px'};
-`;
-
-const Label = styled(Form.Label)`
-  font-size: 1rem;
-`;
+import Button from "../../../atoms/Button";
+import NavigationMenu from "../../../molecules/NavigationMenu";
+import Checkbox from "../../../atoms/Checkbox";
 
 const FormGroup = styled.div`
   display: flex;
@@ -26,12 +19,6 @@ const FormGroup = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const FakeLink = styled.span`
-  text-decoration: underline;
-  margin-left: 10px;
-  cursor: pointer;
 `;
 
 const valuesList = [
@@ -60,28 +47,43 @@ const valuesList = [
     active: true
   }
 ];
+const types = {
+  EXPLAIN: 'EXPLAIN',
+  PROFILE: 'PROFILE'
+};
 
-const ConfigurationForm = () => {
+const ConfigurationForm = ({theme}) => {
+  const [currentType, setCurrentType] = useState(types.EXPLAIN);
+
+  const menuItems = [
+    {
+      title: 'Configuration for Explain',
+      active: currentType === types.EXPLAIN,
+      onClick: () => setCurrentType(types.EXPLAIN)
+
+    },
+    {
+      title: 'Configuration for Profile',
+      active: currentType === types.PROFILE,
+      onClick: () => setCurrentType(types.PROFILE)
+    }
+  ];
+
   return (
-    <Form>
-      <Subtitle>Total volume of critical statuses</Subtitle>
-      <Input type="number" />
-      <br/>
-      <Subtitle>Check critical statuses with threshold value</Subtitle>
-      {valuesList.map(item => (
-        <FormGroup key={item.id}>
-          <InputWrapper>
-            <Form.Check checked={item.active}/>
-            <Label>{item.name}</Label>
-          </InputWrapper>
-          <InputWrapper>
-            <Input disabled={true} value={item.value} size='small'/>
-            <FakeLink>change</FakeLink>
-          </InputWrapper>
-        </FormGroup>
-      ))}
-      <Button variant='success'>Apply</Button>
-    </Form>
+    <>
+      <NavigationMenu menuItems={menuItems}/>
+      <form>
+        <Subtitle>Enable critical statuses</Subtitle>
+        {valuesList.map(item => (
+          <FormGroup key={item.id}>
+            <InputWrapper>
+              <Checkbox checked={item.active}>{item.name}</Checkbox>
+            </InputWrapper>
+          </FormGroup>
+        ))}
+        <Button color={theme.colors.green}>Apply</Button>
+      </form>
+    </>
   )
 };
-export default ConfigurationForm;
+export default withTheme(ConfigurationForm);

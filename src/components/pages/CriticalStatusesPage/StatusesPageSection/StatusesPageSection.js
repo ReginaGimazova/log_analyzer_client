@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from "styled-components";
+import styled, {withTheme} from "styled-components";
 import SearchInput from "../../../atoms/SearchInput";
 import QueriesList from "../../../molecules/QueriesList";
 import {Link} from "react-router-dom";
+import Button from "../../../atoms/Button";
 
 const HighLightText = styled.p`
   margin-bottom: 30px;
@@ -17,9 +18,21 @@ const HighLightText = styled.p`
   }
 `;
 
-const StatusesPageSection = ({queries}) => {
+const ButtonWrapper = styled.div`
+  margin: 20px 0 50px 0;
+`;
+
+const GreenButton = styled(Button)`
+  font-weight: bold;
+  padding: 10px;
+`;
+
+const StatusesPageSection = ({queries, type, theme}) => {
   return (
     <>
+      <ButtonWrapper>
+        <GreenButton color={theme.colors.green}>Run queries with {type}</GreenButton>
+      </ButtonWrapper>
       <HighLightText>Statements with critical statuses according to the
         <Link to={'configuration'}>
           configuration
@@ -31,4 +44,4 @@ const StatusesPageSection = ({queries}) => {
   )
 };
 
-export default StatusesPageSection;
+export default withTheme(StatusesPageSection);
