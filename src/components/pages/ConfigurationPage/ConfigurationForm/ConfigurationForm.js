@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { withTheme } from "styled-components";
 import Subtitle from "../../../atoms/Subtitle/Subtitle";
 import Button from "../../../atoms/Button";
-import NavigationMenu from "../../../molecules/NavigationMenu";
 import Checkbox from "../../../atoms/Checkbox";
 
 const FormGroup = styled.div`
@@ -21,66 +20,24 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-const valuesList = [
-  {
-    id: 0,
-    name: "removing tmp table",
-    value: 0.01,
-    active: true
-  },
-  {
-    id: 1,
-    name: "rolling back",
-    value: 0.025,
-    active: false
-  },
-  {
-    id: 2,
-    name: "rename result table",
-    value: 0.3,
-    active: false
-  },
-  {
-    id: 3,
-    name: "opening tables",
-    value: 0.0178,
-    active: true
-  }
-];
-const types = {
-  EXPLAIN: "EXPLAIN",
-  PROFILE: "PROFILE"
-};
+const SubmitButton = styled(Button)`
+  margin-top: 20px;
+  padding: 5px;
+`;
 
-const ConfigurationForm = ({ theme }) => {
-  const [currentType, setCurrentType] = useState(types.EXPLAIN);
-
-  const menuItems = [
-    {
-      title: "Configuration for Explain",
-      active: currentType === types.EXPLAIN,
-      onClick: () => setCurrentType(types.EXPLAIN)
-    },
-    {
-      title: "Configuration for Profile",
-      active: currentType === types.PROFILE,
-      onClick: () => setCurrentType(types.PROFILE)
-    }
-  ];
-
+const ConfigurationForm = ({ theme, configs }) => {
   return (
     <>
-      <NavigationMenu menuItems={menuItems} />
       <form>
         <Subtitle>Enable critical statuses</Subtitle>
-        {valuesList.map(item => (
+        {configs.map(item => (
           <FormGroup key={item.id}>
             <InputWrapper>
-              <Checkbox checked={item.active}>{item.name}</Checkbox>
+              <Checkbox checked={item.active}>{item.value}</Checkbox>
             </InputWrapper>
           </FormGroup>
         ))}
-        <Button color={theme.colors.green}>Apply</Button>
+        <SubmitButton color={theme.colors.green}>Apply</SubmitButton>
       </form>
     </>
   );

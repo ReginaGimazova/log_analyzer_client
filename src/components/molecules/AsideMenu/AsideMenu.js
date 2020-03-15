@@ -1,7 +1,7 @@
 import React from "react";
 import { push as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
-import { AsideMenuWrapper } from "./styles";
+import AsideMenuWrapper from "./styles";
 
 const AsideMenu = () => {
   return (

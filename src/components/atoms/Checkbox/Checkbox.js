@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+
 const Label = styled.label`
   display: flex;
   position: relative;
@@ -24,9 +25,9 @@ const DefaultCheckbox = styled.input(
     border: 0.0625rem solid #adadad;
   }
   &:checked + span {
-      background: ${colors.red} url(../../../static/icons/checkmark.svg) center no-repeat;
+      background: ${colors.blue} url(../../../static/icons/checkmark.svg) center no-repeat;
       background-size: 0.8rem;
-      border: 0.0625rem solid ${colors.red};
+      border: 0.0625rem solid ${colors.blue};
     }
   }
 `

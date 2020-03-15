@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
+import { Link } from "react-router-dom";
 import SearchInput from "../../../atoms/SearchInput";
 import QueriesList from "../../../molecules/QueriesList";
-import { Link } from "react-router-dom";
 import Button from "../../../atoms/Button";
 
 const HighLightText = styled.p`
@@ -37,7 +37,7 @@ const StatusesPageSection = ({ queries, type, theme }) => {
       </ButtonWrapper>
       <HighLightText>
         Statements with critical statuses according to the
-        <Link to={"configuration"}>configuration</Link>
+        <Link to="configuration">configuration</Link>
       </HighLightText>
       <SearchInput />
       <QueriesList isAnalyzerPage={false} queries={queries} />

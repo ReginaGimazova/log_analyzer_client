@@ -40,7 +40,7 @@ const SqlAnalyzeSection = () => {
     <Section>
       <Subtitle>Parametrized statements grouped by SQL </Subtitle>
       <SearchInput />
-      <QueriesList isAnalyzerPage={true} queries={queries} />
+      <QueriesList isAnalyzerPage queries={queries} />
     </Section>
   );
 };

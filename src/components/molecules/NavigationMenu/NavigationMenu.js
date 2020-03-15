@@ -7,6 +7,7 @@ const Navigation = styled.div`
   display: flex;
   justify-content: space-between;
   width: max-content;
+  max-width: 100%;
   margin-bottom: 30px;
 
   @media all and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -24,6 +25,7 @@ const NavigationButton = styled(Button)(
   }
   
   @media all and (max-width: ${breakpoints.sm}){
+     width: 100%;
      &:first-child{
        margin-right: 0;
        margin-bottom: 10px;

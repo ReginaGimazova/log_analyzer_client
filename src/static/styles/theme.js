@@ -1,21 +1,22 @@
 const theme = {
   colors: {
-    lightGrey: '#dedede',
-    grey: '#9f9f9f',
-    darkGrey: '#5c5b5b',
-    black: '#000',
-    white: '#fff',
-    green: '#92ac6d',
-    darkGreen: '#556e3b',
-    red: '#a5131d',
-    lightRed: '#a56a6b'
+    lightGrey: "#dedede",
+    grey: "#9f9f9f",
+    darkGrey: "#5c5b5b",
+    black: "#000",
+    white: "#fff",
+    green: "#92ac6d",
+    darkGreen: "#556e3b",
+    red: "#a5131d",
+    lightRed: "#a56a6b",
+    blue: "#356e9a"
   },
   breakpoints: {
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px',
-  },
+    sm: "576px",
+    md: "768px",
+    lg: "992px",
+    xl: "1200px"
+  }
 };
 
 export default theme;
