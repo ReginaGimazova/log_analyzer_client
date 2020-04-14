@@ -18,6 +18,7 @@ const Text = styled.span`
   margin-right: 100px;
   line-height: 24px;
   text-align: justify;
+  font: 15px Roboto Mono, monospace;
 `;
 
 const ListHeader = styled.div`

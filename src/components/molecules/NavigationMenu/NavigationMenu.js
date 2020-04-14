@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import Button from "../../atoms/Button";
+import Button from "../../atoms/buttons/Button";
 
 const Navigation = styled.div`
   display: flex;
@@ -17,21 +17,28 @@ const Navigation = styled.div`
 `;
 
 const NavigationButton = styled(Button)(
-  ({ theme: { breakpoints } }) => `
-  padding: 10px 20px;
-  
-  &:first-child{
-    margin-right: 30px;
-  }
-  
-  @media all and (max-width: ${breakpoints.sm}){
-     width: 100%;
-     &:first-child{
-       margin-right: 0;
-       margin-bottom: 10px;
-     }
-  } 
-`
+  ({ theme: { breakpoints } }) => css`
+    padding: 10px 20px;
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:nth-child(2) {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      margin-left: -1px;
+    }
+
+    @media all and (max-width: ${breakpoints.sm}) {
+      width: 100%;
+      &:first-child {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+  `
 );
 
 const NavigationMenu = ({ menuItems }) => (

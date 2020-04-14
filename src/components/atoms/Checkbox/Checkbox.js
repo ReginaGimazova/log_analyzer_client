@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
 const Label = styled.label`
@@ -18,14 +18,13 @@ const DefaultCheckbox = styled.input(
   position: absolute;
   top: 0.125rem;
   left: 0;
-  opacity: 0;
   cursor: pointer;
   + span {
     background-color: transparent;
     border: 0.0625rem solid #adadad;
   }
   &:checked + span {
-      background: ${colors.blue} url(../../../static/icons/checkmark.svg) center no-repeat;
+      background: ${colors.blue} url('/src/static/icons/checkmark.svg') center no-repeat;
       background-size: 0.8rem;
       border: 0.0625rem solid ${colors.blue};
     }
@@ -54,7 +53,6 @@ const Checkbox = ({ onChange, value, checked, children, id }) => (
       checked={checked}
       id={id}
     />
-    <CustomCheckbox checked={checked} />
     {children}
   </Label>
 );

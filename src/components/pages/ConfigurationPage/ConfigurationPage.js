@@ -3,6 +3,8 @@ import MainTemplate from "../../templates/MainTemplate";
 import ConfigurationForm from "./ConfigurationForm";
 import NavigationMenu from "../../molecules/NavigationMenu";
 import useConfigurationData from "./useConfigurationData";
+import Spinner from "../../atoms/Spinner/Spinner";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const types = {
   EXPLAIN: "EXPLAIN",
@@ -10,7 +12,7 @@ const types = {
 };
 
 const ConfigurationPage = () => {
-  const { data } = useConfigurationData();
+  const { data, loading, error } = useConfigurationData();
 
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
 
@@ -27,11 +29,19 @@ const ConfigurationPage = () => {
     }
   ];
 
+  const configForCurrentCommandType = data.filter(
+    status => status.type === currentType
+  );
+
   return (
     <MainTemplate pageTitle="Configuration">
       <NavigationMenu menuItems={menuItems} />
 
-      <ConfigurationForm configs={data} />
+      {loading && <Spinner />}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {data.length > 0 && (
+        <ConfigurationForm configs={configForCurrentCommandType} />
+      )}
     </MainTemplate>
   );
 };

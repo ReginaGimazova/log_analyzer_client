@@ -1,30 +1,30 @@
-const useConfigurationData = () => {
-  const configuration = {
-    config: [
-      {
-        id: 0,
-        value: "removing tmp table",
-        active: true
-      },
-      {
-        id: 1,
-        value: "rolling back",
-        active: false
-      },
-      {
-        id: 2,
-        value: "rename result table",
-        active: false
-      },
-      {
-        id: 3,
-        value: "opening tables",
-        active: true
-      }
-    ]
-  };
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-  return { data: configuration.config };
+const apiUrl = process.env.API_URL;
+
+const useConfigurationData = () => {
+  const [configData, setConfigData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5000/configuration`)
+      .then(({ data }) => {
+        setConfigData(data);
+        setError("");
+        setLoading(false);
+      })
+      .catch(e => {
+        setConfigData([]);
+        setError(e.message);
+        setLoading(false);
+      });
+  }, []);
+
+  return { data: configData, loading, error };
 };
 
 export default useConfigurationData;

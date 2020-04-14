@@ -1,9 +1,13 @@
 import React from "react";
-import styled, { withTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
 import SearchInput from "../../../atoms/SearchInput";
 import QueriesList from "../../../molecules/QueriesList";
-import Button from "../../../atoms/Button";
+import Button from "../../../atoms/buttons/Button";
+import ConfirmationWindow from "../../../molecules/ConfirmationWindow";
 
 const HighLightText = styled.p`
   margin-bottom: 30px;
@@ -22,18 +26,39 @@ const ButtonWrapper = styled.div`
   margin: 20px 0 50px 0;
 `;
 
-const GreenButton = styled(Button)`
+const customButtonStyles = theme => css`
   font-weight: bold;
   padding: 10px;
+  background-color: ${theme.colors.green};
+  color: ${theme.colors.lightGrey};
 `;
 
-const StatusesPageSection = ({ queries, type, theme }) => {
+const StatusesPageSection = ({ queries, type }) => {
+  const title = `Run the command ${type} for all filtered queries`;
+  const message = "Are you sure to do this.";
+
+  const confirmCommand = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className="custom-ui">
+            <ConfirmationWindow
+              message={message}
+              title={title}
+              onClose={onClose}
+            />
+          </div>
+        );
+      }
+    });
+  };
+
   return (
     <>
       <ButtonWrapper>
-        <GreenButton color={theme.colors.green}>
-          Run queries with {type}
-        </GreenButton>
+        <Button customStyles={customButtonStyles} onClick={confirmCommand}>
+          EXPLAIN
+        </Button>
       </ButtonWrapper>
       <HighLightText>
         Statements with critical statuses according to the
@@ -45,4 +70,4 @@ const StatusesPageSection = ({ queries, type, theme }) => {
   );
 };
 
-export default withTheme(StatusesPageSection);
+export default StatusesPageSection;

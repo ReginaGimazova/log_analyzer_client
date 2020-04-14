@@ -1,6 +1,17 @@
 {
   "plugins": [
     ["styled-components"],
-    ["module-resolver", {"root": ["./"]}]
+    ["module-resolver", { "root": ["./"] }],
+    [
+      "file-loader",
+      {
+        "name": "[hash].[ext]",
+        "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
+        "publicPath": "/static",
+        "outputPath": "/public",
+        "context": "",
+        "limit": 0
+      }
+    ]
   ]
 }
