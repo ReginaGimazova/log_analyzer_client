@@ -8,7 +8,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   display: flex;
-  padding: 20px;
+  padding: 20px 0;
   overflow-x: auto;
   border-top: 2px solid ${({ theme }) => theme.colors.lightGrey};
 `;

@@ -10,14 +10,15 @@ const Navigation = styled.div`
   max-width: 100%;
   margin-bottom: 30px;
 
-  @media all and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
     width: 100%;
+    margin-bottom: 60px;
   }
 `;
 
 const NavigationButton = styled(Button)(
-  ({ theme: { breakpoints } }) => css`
+  ({ theme: { breakpoints, colors } }) => css`
     padding: 10px 20px;
 
     &:first-child {
@@ -31,11 +32,12 @@ const NavigationButton = styled(Button)(
       margin-left: -1px;
     }
 
-    @media all and (max-width: ${breakpoints.sm}) {
+    @media screen and (max-width: ${breakpoints.sm}) {
       width: 100%;
+      padding: 10px 0;
+      border-bottom: 1px solid ${colors.darkGrey};
       &:first-child {
         margin-right: 0;
-        margin-bottom: 10px;
       }
     }
   `

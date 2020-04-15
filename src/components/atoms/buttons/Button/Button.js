@@ -3,18 +3,22 @@ import styled, { css } from "styled-components";
 
 const MyButton = styled.button(
   ({ theme, theme: { colors }, active, customStyles }) => css`
-    border: none;
     width: max-content;
     min-width: 150px;
-    color: ${colors.white};
     border-radius: 3px;
-    background-color: ${active ? colors.darkGrey : colors.lightGrey};
-    color: ${active ? colors.lightGrey : colors.darkGrey};
+    background-color: ${active ? colors.lightGrey : colors.white};
+    color: ${colors.darkGrey};
+    cursor: pointer;
+    font-weight: ${active ? "bold" : "normal"};
+    transition: all 0.8s ease;
 
     &:hover,
-    &:focus,
+    &:focus {
+      background-color: ${colors.lightGrey};
+    }
+
     &:active {
-      background-color: ${colors.darkGrey};
+      font-weight: bold;
     }
 
     ${customStyles && customStyles(theme)};

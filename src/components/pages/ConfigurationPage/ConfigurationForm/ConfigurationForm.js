@@ -22,6 +22,11 @@ const customStyles = ({ colors }) => css`
   padding: 5px;
   background-color: ${colors.green};
   color: ${colors.white};
+
+  &:hover,
+  &:focus {
+    background-color: ${colors.darkGreen};
+  }
 `;
 
 const ConfigurationForm = ({ configs }) => {
@@ -59,7 +64,7 @@ const ConfigurationForm = ({ configs }) => {
 
   return (
     <form>
-      <Subtitle>Enable critical statuses</Subtitle>
+      <Subtitle>Explain statuses configuration</Subtitle>
       {configs.map(item => getCheckbox({ id: item.id, value: item.value }))}
       <Button customStyles={customStyles}>Apply</Button>
     </form>

@@ -26,11 +26,19 @@ const ButtonWrapper = styled.div`
   margin: 20px 0 50px 0;
 `;
 
-const customButtonStyles = theme => css`
+const customButtonStyles = ({ colors, breakpoints }) => css`
   font-weight: bold;
   padding: 10px;
-  background-color: ${theme.colors.green};
-  color: ${theme.colors.lightGrey};
+  color: ${colors.lightGrey};
+  background-color: ${colors.green};
+  &:hover,
+  &:focus {
+    background-color: ${colors.darkGreen};
+  }
+
+  @media screen and (max-width: ${breakpoints.sm}) {
+    width: 100%;
+  }
 `;
 
 const StatusesPageSection = ({ queries, type }) => {
