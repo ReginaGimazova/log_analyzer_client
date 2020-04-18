@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import Subtitle from "../../../atoms/Subtitle/Subtitle";
 import Button from "../../../atoms/buttons/Button";
 import Checkbox from "../../../atoms/Checkbox";
 import getActiveStatuses from "./getActivestatuses";
@@ -64,7 +63,6 @@ const ConfigurationForm = ({ configs }) => {
 
   return (
     <form>
-      <Subtitle>Explain statuses configuration</Subtitle>
       {configs.map(item => getCheckbox({ id: item.id, value: item.value }))}
       <Button customStyles={customStyles}>Apply</Button>
     </form>

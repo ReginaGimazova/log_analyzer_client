@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AsideMenu from "../../molecules/AsideMenu";
 import Header from "../../molecules/Header";
 import PageTitle from "../../atoms/PageTitle";
+import NavigationMenu from "../../molecules/NavigationMenu";
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,13 +31,14 @@ const Main = styled.main(
 `
 );
 
-const MainTemplate = ({ children, pageTitle }) => (
+const MainTemplate = ({ children, pageTitle, menuItems }) => (
   <Wrapper>
     <Header />
     <PageContent id="outer-container">
       <AsideMenu />
       <Main id="page-wrap">
         <PageTitle>{pageTitle}</PageTitle>
+        {menuItems && <NavigationMenu menuItems={menuItems} />}
         {children}
       </Main>
     </PageContent>

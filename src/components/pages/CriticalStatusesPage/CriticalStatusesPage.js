@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "./StatusesPageSection";
-import NavigationMenu from "../../molecules/NavigationMenu";
 
 const queries = [
   {
@@ -52,8 +51,7 @@ const CriticalStatusesPage = () => {
   ];
 
   return (
-    <MainTemplate pageTitle="Critical statuses">
-      <NavigationMenu menuItems={menuItems} />
+    <MainTemplate pageTitle="Critical statuses" menuItems={menuItems}>
       <StatusesPageSection queries={queries} type={currentType} />
     </MainTemplate>
   );

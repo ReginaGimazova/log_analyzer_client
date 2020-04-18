@@ -1,13 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 
 import SearchInput from "../../../atoms/SearchInput";
 import QueriesList from "../../../molecules/QueriesList";
 import Button from "../../../atoms/buttons/Button";
-import ConfirmationWindow from "../../../molecules/ConfirmationWindow";
 
 const HighLightText = styled.p`
   margin-bottom: 30px;
@@ -45,28 +42,10 @@ const StatusesPageSection = ({ queries, type }) => {
   const title = `Run the command ${type} for all filtered queries`;
   const message = "Are you sure to do this.";
 
-  const confirmCommand = () => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div className="custom-ui">
-            <ConfirmationWindow
-              message={message}
-              title={title}
-              onClose={onClose}
-            />
-          </div>
-        );
-      }
-    });
-  };
-
   return (
     <>
       <ButtonWrapper>
-        <Button customStyles={customButtonStyles} onClick={confirmCommand}>
-          EXPLAIN
-        </Button>
+        <Button customStyles={customButtonStyles}>{type}</Button>
       </ButtonWrapper>
       <HighLightText>
         Statements with critical statuses according to the

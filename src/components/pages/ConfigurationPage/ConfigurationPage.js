@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import ConfigurationForm from "./ConfigurationForm";
-import NavigationMenu from "../../molecules/NavigationMenu";
 import useConfigurationData from "./useConfigurationData";
-import Spinner from "../../atoms/Spinner/Spinner";
+import Loader from "../../atoms/Loader";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
+import Subtitle from "../../atoms/Subtitle/Subtitle";
 
 const types = {
   EXPLAIN: "EXPLAIN",
@@ -34,13 +34,14 @@ const ConfigurationPage = () => {
   );
 
   return (
-    <MainTemplate pageTitle="Configuration">
-      <NavigationMenu menuItems={menuItems} />
-
-      {loading && <Spinner />}
+    <MainTemplate pageTitle="Configuration" menuItems={menuItems}>
+      {loading && <Loader />}
       {error && <ErrorMessage>{error}</ErrorMessage>}
       {data.length > 0 && (
-        <ConfigurationForm configs={configForCurrentCommandType} />
+        <>
+          <Subtitle>{currentType} statuses configuration</Subtitle>
+          <ConfigurationForm configs={configForCurrentCommandType} />
+        </>
       )}
     </MainTemplate>
   );

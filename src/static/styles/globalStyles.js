@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     margin: 0;
     font-weight: bold;
+    color: #5F6368;
   }
   
   p {

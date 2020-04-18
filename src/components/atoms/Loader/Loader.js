@@ -17,7 +17,8 @@ const SpinnerElem = styled.div(
     top: 0;
     width: 20px;
     height: 20px;
-    border: solid 0.25rem ${colors.green};
+    margin-left: 20px;
+    border: solid 0.25rem ${colors.darkGrey};
     border-left-color: transparent;
     border-radius: 50%;
     animation: ${rotation} 1s linear infinite;
@@ -25,8 +26,24 @@ const SpinnerElem = styled.div(
   `
 );
 
-const Spinner = ({ customStyles }) => {
-  return <SpinnerElem customStyles={customStyles} />;
+const LoaderWrapper = styled.div`
+  display: flex;
+`;
+
+const Text = styled.p`
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.darkGrey};
+`;
+
+const Loader = ({ customStyles }) => {
+  return (
+    <LoaderWrapper>
+      <Text>Loading</Text>
+      <SpinnerElem customStyles={customStyles} />
+    </LoaderWrapper>
+  );
 };
 
-export default Spinner;
+export default Loader;

@@ -19,8 +19,6 @@ const Navigation = styled.div`
 
 const NavigationButton = styled(Button)(
   ({ theme: { breakpoints, colors } }) => css`
-    padding: 10px 20px;
-
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -34,7 +32,6 @@ const NavigationButton = styled(Button)(
 
     @media screen and (max-width: ${breakpoints.sm}) {
       width: 100%;
-      padding: 10px 0;
       border-bottom: 1px solid ${colors.darkGrey};
       &:first-child {
         margin-right: 0;
