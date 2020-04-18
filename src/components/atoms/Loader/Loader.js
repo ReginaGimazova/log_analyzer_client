@@ -12,7 +12,7 @@ const rotation = keyframes`
 `;
 
 const SpinnerElem = styled.div(
-  ({ customStyles, theme: { colors } }) => css`
+  ({ theme: { colors } }) => css`
     left: 0;
     top: 0;
     width: 20px;
@@ -22,26 +22,29 @@ const SpinnerElem = styled.div(
     border-left-color: transparent;
     border-radius: 50%;
     animation: ${rotation} 1s linear infinite;
-    ${customStyles && customStyles(colors)}
   `
 );
 
-const LoaderWrapper = styled.div`
-  display: flex;
-`;
+const LoaderWrapper = styled.div(
+  ({ customStyles }) => css`
+    display: flex;
+    ${customStyles && customStyles()}
+  `
+);
 
 const Text = styled.p`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.darkGrey};
+  display: block;
 `;
 
 const Loader = ({ customStyles }) => {
   return (
-    <LoaderWrapper>
+    <LoaderWrapper customStyles={customStyles}>
       <Text>Loading</Text>
-      <SpinnerElem customStyles={customStyles} />
+      <SpinnerElem />
     </LoaderWrapper>
   );
 };

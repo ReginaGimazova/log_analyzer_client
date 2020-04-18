@@ -41,13 +41,13 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
         <span>{queries.length} Queries</span>
         {isAnalyzerPage && <span>Execution counts</span>}
       </ListHeader>
-      {queries.map((item, index) => (
+      {queries.map(({ query_count, parsed_query }, index) => (
         <div key={index}>
           <ListItem>
-            <Text>{item.query_text}</Text>
-            {isAnalyzerPage && <Count>{queries.length}</Count>}
+            <Text>{parsed_query}</Text>
+            {isAnalyzerPage && <Count>{query_count}</Count>}
           </ListItem>
-          {!isAnalyzerPage && <StatusList statuses={item.critical_statuses} />}
+          {/* {!isAnalyzerPage && <StatusList statuses={item.critical_statuses} />}*/}
         </div>
       ))}
     </List>

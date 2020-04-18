@@ -6,6 +6,9 @@ import MainTemplate from "../../templates/MainTemplate";
 import SqlAnalyzeSection from "./SqlAnalyzeSection";
 import Pagination from "../../molecules/Pagination";
 import Button from "../../atoms/buttons/Button";
+import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
+import Loader from "../../atoms/Loader";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const customStyles = ({ colors }) => css`
   border: 2px solid ${colors.red};
@@ -20,7 +23,13 @@ const customStyles = ({ colors }) => css`
   }
 `;
 
+const loaderCustomStyles = () => css`
+  margin-top: 50px;
+`;
+
 const OriginalDumpAnalyzePage = () => {
+  const { data, loading, error } = useOriginDumpAnalyzeData();
+
   const [isBySql, setIsBySql] = useState(true);
   const menuItems = [
     {
@@ -50,8 +59,14 @@ const OriginalDumpAnalyzePage = () => {
         Start log analyze
       </Button>
       <div>
-        {isBySql ? <SqlAnalyzeSection /> : <p>another</p>}
-        <Pagination />
+        {loading && <Loader customStyles={loaderCustomStyles} />}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {data.length > 0 && (
+          <>
+            <SqlAnalyzeSection isBySql={isBySql} data={data} />
+            <Pagination />
+          </>
+        )}
       </div>
     </MainTemplate>
   );
