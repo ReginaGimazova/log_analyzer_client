@@ -17,7 +17,7 @@ const TableStats = ({ data, theme }) => {
       <BarChart data={data} layout="vertical" barCategoryGap={3}>
         <CartesianGrid horizontal={false} stroke="#ebf3f0" width={10} />
         <XAxis type="number" />
-        <YAxis type="category" tick={false} dataKey="name" width={5} />
+        <YAxis type="category" stroke="#000" dataKey="name" width={150} />
         <Tooltip cursor={{ fill: theme.colors.lightGrey }} />
         <Bar dataKey="call_count">
           {data.map((table, index) => (

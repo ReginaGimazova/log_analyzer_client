@@ -7,9 +7,6 @@ const Label = styled.label`
   margin-top: 1.25rem;
   padding-left: 1.5rem;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 `;
 
@@ -19,6 +16,8 @@ const DefaultCheckbox = styled.input(
   top: 0.125rem;
   left: 0;
   cursor: pointer;
+  opacity: 0;
+  
   + span {
     background-color: transparent;
     border: 0.0625rem solid #adadad;
@@ -53,6 +52,7 @@ const Checkbox = ({ onChange, value, checked, children, id }) => (
       checked={checked}
       id={id}
     />
+    <CustomCheckbox checked={checked} />
     {children}
   </Label>
 );

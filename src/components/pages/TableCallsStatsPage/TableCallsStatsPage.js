@@ -3,7 +3,7 @@ import MainTemplate from "../../templates/MainTemplate";
 import useTableStatisticData from "./useTableStatisticData";
 import TableStats from "../../molecules/TableStats";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
-import Loader from "../../atoms/Loader";
+import Loader from "../../molecules/loaders/Loader";
 
 const TableCallsStatsPage = () => {
   const { data, loading, error } = useTableStatisticData();

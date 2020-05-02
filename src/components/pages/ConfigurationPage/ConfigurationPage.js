@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import ConfigurationForm from "./ConfigurationForm";
 import useConfigurationData from "./useConfigurationData";
-import Loader from "../../atoms/Loader";
+import Loader from "../../molecules/loaders/Loader";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
 
