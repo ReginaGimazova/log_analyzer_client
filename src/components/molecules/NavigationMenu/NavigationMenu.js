@@ -8,12 +8,10 @@ const Navigation = styled.div`
   justify-content: space-between;
   width: max-content;
   max-width: 100%;
-  margin-bottom: 30px;
 
   @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
     width: 100%;
-    margin-bottom: 60px;
   }
 `;
 

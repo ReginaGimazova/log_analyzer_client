@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useSearchQueries from "../../../hooks/useSearchQueries";
 
 const apiUrl = process.env.API_URL;
 
-const useOriginDumpAnalyzeData = (byHost = false) => {
-  const [queries, setQueries] = useState([]);
+const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const getTables = () => {
     axios
@@ -23,30 +21,16 @@ const useOriginDumpAnalyzeData = (byHost = false) => {
       });
   };
 
-  const getQueries = hostParam => {
-    setLoading(true);
-    axios
-      .get(`http://localhost:5000/queries?host=${hostParam}`)
-      .then(({ data }) => {
-        setQueries(data);
-        setError("");
-        setLoading(false);
-      })
-      .catch(e => {
-        setQueries([]);
-        setError(e.message);
-        setLoading(false);
-      });
-  };
-  useEffect(() => {
-    getQueries(byHost);
-  }, [byHost]);
+  const { queries, loading, error, getQueries } = useSearchQueries({
+    tables: chosenTables,
+    byHost
+  });
 
   useEffect(() => {
     getTables();
   }, []);
 
-  return { data: queries, loading, error, tables, tablesError };
+  return { data: queries, loading, error, tables, tablesError, getQueries };
 };
 
 export default useOriginDumpAnalyzeData;

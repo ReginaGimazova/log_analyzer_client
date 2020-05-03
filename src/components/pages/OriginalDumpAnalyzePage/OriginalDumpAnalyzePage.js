@@ -6,17 +6,19 @@ import SqlAnalyzeSection from "./SqlAnalyzeSection";
 import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 import StartLogAnalyzeButton from "../../atoms/buttons/StartLogAnalyzeButton";
-import TableSelect from "../../atoms/Select/TableSelect";
 
 const OriginalDumpAnalyzePage = () => {
   const [byHost, setByHost] = useState(false);
+  const [chosenTables, setChosenTables] = useState([]);
+
   const {
     data,
     loading,
     error,
     tablesError,
-    tables
-  } = useOriginDumpAnalyzeData(byHost);
+    tables,
+    getQueries
+  } = useOriginDumpAnalyzeData(byHost, chosenTables);
 
   const menuItems = [
     {
@@ -42,19 +44,19 @@ const OriginalDumpAnalyzePage = () => {
       menuItems={menuItems}
       loading={loading}
       isData={data.length}
+      error={error}
+      topRight={<StartLogAnalyzeButton onClick={onStartAnalyze} />}
     >
-      <div>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        {!data.length && !loading && (
-          <StartLogAnalyzeButton onClick={onStartAnalyze} />
-        )}
-        {data.length > 0 && (
-          <>
-            <TableSelect allTables={tables} />
-            <SqlAnalyzeSection byHost={byHost} data={data} />
-          </>
-        )}
-      </div>
+      {data.length > 0 && (
+        <SqlAnalyzeSection
+          byHost={byHost}
+          data={data}
+          tables={tables}
+          chosenTables={chosenTables}
+          setChosenTables={setChosenTables}
+          reSearchQueries={getQueries}
+        />
+      )}
     </MainTemplate>
   );
 };

@@ -6,6 +6,7 @@ import PageTitle from "../../atoms/PageTitle";
 import NavigationMenu from "../../molecules/NavigationMenu";
 import Loader from "../../molecules/loaders/Loader";
 import OverlayLoader from "../../molecules/loaders/OverlayLoader";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,18 +34,43 @@ const Main = styled.main(
   `
 );
 
+const Top = styled.div(
+  ({ theme: { breakpoints } }) => css`
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: ${breakpoints.md}) {
+      flex-direction: column;
+      justify-content: center;
+    }
+  `
+);
+
 const loaderCustomStyles = () => css`
   margin-top: 50px;
 `;
 
-const MainTemplate = ({ children, pageTitle, menuItems, loading, isData }) => (
+const MainTemplate = ({
+  children,
+  pageTitle,
+  menuItems,
+  loading,
+  isData,
+  error,
+  topRight
+}) => (
   <Wrapper>
     <Header />
     <PageContent id="outer-container">
       <AsideMenu />
       <Main id="page-wrap">
         <PageTitle>{pageTitle}</PageTitle>
-        {menuItems && <NavigationMenu menuItems={menuItems} />}
+        <Top>
+          {menuItems && <NavigationMenu menuItems={menuItems} />}
+          {topRight && topRight}
+        </Top>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
         {loading &&
           (!isData ? (
             <Loader customStyles={loaderCustomStyles} />

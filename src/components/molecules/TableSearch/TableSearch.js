@@ -6,18 +6,18 @@ import selectCustomStyles from "./customStyles";
 import tablesForSelect from "../../../utils/tablesForSelect";
 
 const SelectWrapper = styled.div`
-  width: 70%;
-  margin-bottom: 50px;
+  display: inline-block;
+  width: 100%;
 `;
 
-const TableSelect = ({ choseTables, allTables, onChange }) => {
+const TableSearch = ({ chosenTables, allTables, onChange }) => {
   const dataForSelect = tablesForSelect(allTables);
 
   return (
     <SelectWrapper>
       <Select
         options={dataForSelect}
-        value={choseTables}
+        value={chosenTables}
         onChange={onChange}
         styles={selectCustomStyles}
         isMulti
@@ -29,4 +29,4 @@ const TableSelect = ({ choseTables, allTables, onChange }) => {
   );
 };
 
-export default TableSelect;
+export default TableSearch;
