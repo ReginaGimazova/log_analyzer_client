@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import axios from "axios";
 
-const useSearchQueries = ({ tables, byHost }) => {
+const useFetchQueries = ({ tables, byHost }) => {
   const [queries, setQueries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -34,4 +34,4 @@ const useSearchQueries = ({ tables, byHost }) => {
   return { queries, loading, error, getQueries };
 };
 
-export default useSearchQueries;
+export default useFetchQueries;

@@ -14,7 +14,7 @@ const LoaderWrapper = styled.div(
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: ${data ? "0.7" : "1"};
+    opacity: ${data ? "0.8" : "1"};
   `
 );
 

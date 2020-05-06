@@ -15,8 +15,8 @@ const SpinnerElem = styled.div(
   ({ theme: { colors } }) => css`
     left: 0;
     top: 0;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-left: 20px;
     border: solid 0.25rem ${colors.darkGrey};
     border-left-color: transparent;
@@ -35,7 +35,7 @@ const LoaderWrapper = styled.div(
 const Text = styled.p`
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.darkGrey};
   display: block;
 `;

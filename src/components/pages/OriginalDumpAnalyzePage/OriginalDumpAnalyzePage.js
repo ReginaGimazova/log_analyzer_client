@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import MainTemplate from "../../templates/MainTemplate";
 import SqlAnalyzeSection from "./SqlAnalyzeSection";
 import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
-import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 import StartLogAnalyzeButton from "../../atoms/buttons/StartLogAnalyzeButton";
+import useInsertProgress from "../../../hooks/useInsertProgress";
+import ProgressBar from "../../molecules/ProgressBar";
 
 const OriginalDumpAnalyzePage = () => {
   const [byHost, setByHost] = useState(false);
@@ -15,10 +16,12 @@ const OriginalDumpAnalyzePage = () => {
     data,
     loading,
     error,
-    tablesError,
     tables,
-    getQueries
+    getQueries,
+    getTables
   } = useOriginDumpAnalyzeData(byHost, chosenTables);
+
+  const { fetchProgress, progress } = useInsertProgress();
 
   const menuItems = [
     {
@@ -36,7 +39,15 @@ const OriginalDumpAnalyzePage = () => {
   const onStartAnalyze = event => {
     event.preventDefault();
     axios.post("http://localhost:5000/start");
+    fetchProgress();
   };
+
+  useEffect(() => {
+    if (progress === 100) {
+      getQueries();
+      getTables();
+    }
+  }, [progress]);
 
   return (
     <MainTemplate
@@ -47,6 +58,8 @@ const OriginalDumpAnalyzePage = () => {
       error={error}
       topRight={<StartLogAnalyzeButton onClick={onStartAnalyze} />}
     >
+      {!data.length && !loading && !error && <ProgressBar percent={progress} />}
+
       {data.length > 0 && (
         <SqlAnalyzeSection
           byHost={byHost}

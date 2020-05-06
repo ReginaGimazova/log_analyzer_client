@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StatusList from "../StatusList";
+import removeQuotes from "../../../utils/removeQuotes";
 
 const List = styled.ul`
   margin-top: 3rem;
@@ -44,7 +44,7 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
       {queries.map(({ query_count, parsed_query }, index) => (
         <div key={index}>
           <ListItem>
-            <Text>{parsed_query}</Text>
+            <Text>{removeQuotes(parsed_query)}</Text>
             {isAnalyzerPage && <Count>{query_count}</Count>}
           </ListItem>
           {/* {!isAnalyzerPage && <StatusList statuses={item.critical_statuses} />}*/}

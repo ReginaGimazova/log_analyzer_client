@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import useSearchQueries from "../../../hooks/useSearchQueries";
+import useFetchQueries from "../../../hooks/useFetchQueries";
 
 const apiUrl = process.env.API_URL;
 
@@ -21,7 +21,7 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
       });
   };
 
-  const { queries, loading, error, getQueries } = useSearchQueries({
+  const { queries, loading, error, getQueries } = useFetchQueries({
     tables: chosenTables,
     byHost
   });
@@ -30,7 +30,15 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
     getTables();
   }, []);
 
-  return { data: queries, loading, error, tables, tablesError, getQueries };
+  return {
+    data: queries,
+    loading,
+    error,
+    tables,
+    tablesError,
+    getQueries,
+    getTables
+  };
 };
 
 export default useOriginDumpAnalyzeData;
