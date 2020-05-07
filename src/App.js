@@ -8,7 +8,6 @@ import OriginalDumpAnalyzePage from "./components/pages/OriginalDumpAnalyzePage"
 import CriticalStatusesPage from "./components/pages/CriticalStatusesPage";
 import TableCallsStatsPage from "./components/pages/TableCallsStatsPage";
 import ConfigurationPage from "./components/pages/ConfigurationPage";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

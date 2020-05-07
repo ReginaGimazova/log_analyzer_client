@@ -1,108 +1,94 @@
 import React from "react";
-import styled from "styled-components";
-import PaginationComponent from "react-bootstrap/Pagination";
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const PaginationWrapper = styled(PaginationComponent)`
+const PaginationWrapper = styled.div`
   width: max-content;
-  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  margin: 100px auto 50px auto;
 `;
 
-const PaginationItem = styled(PaginationComponent.Item)(
-  ({ theme }) => `
+const commonStyles = ({ colors, active = false }) => css`
+  display: flex;
+  align-items: center;
+  height: 44px;
+
+  background-color: ${active ? colors.green : colors.lightGrey};
+
   a {
-    color: ${theme.colors.darkGrey};
-    
-    &:focus{
-      box-shadow: none;
-    }
-    
-    &:hover {
-      color: ${theme.colors.black}
-    }
-    
-    @media all and (max-width: ${theme.breakpoints.sm}){
-      padding: .5rem;
-    }
-  };
-  
-  &.active .page-link {
-    background-color: ${theme.colors.green};
-    border-color: ${theme.colors.green};
-    
-    @media all and (max-width: ${theme.breakpoints.sm}){
-      padding: .5rem;
-    }
+    color: ${active ? colors.white : colors.darkGrey};
   }
-`
+`;
+
+const PaginationItem = styled.div(
+  ({ active, theme: { colors } }) => css`
+    ${commonStyles({ colors, active })};
+
+    a:hover {
+      text-decoration: underline;
+    }
+  `
 );
 
-const PaginationPrev = styled(PaginationComponent.Prev)(
-  ({ theme }) => `
-  a {
-    color: ${theme.colors.darkGrey};
-    
-    &:focus {
-       box-shadow: none;
-    }
-    &:hover {
-      color: ${theme.colors.black}
-    }
-    
-    @media all and (max-width: ${theme.breakpoints.sm}){
-      padding: .5rem;
-    }
-  }
-`
+const Item = styled.span`
+  padding: 12px 20px;
+`;
+
+const IconWrapper = styled.span`
+  padding: 12px 15px;
+`;
+
+const PaginationAction = styled.span(
+  ({ theme, disable }) => css`
+    ${commonStyles(theme)};
+
+    pointer-events: ${disable ? "none" : "inherit"};
+  `
 );
 
-const PaginationNext = styled(PaginationComponent.Next)(
-  ({ theme }) => `
-  a {
-    color: ${theme.colors.darkGrey};
-    &:focus {
-       box-shadow: none;
-    }
-    &:hover {
-      color: ${theme.colors.black}
-    }
-    
-    @media all and (max-width: ${theme.breakpoints.sm}){
-      padding: .5rem;
-    }
-  }
-`
+const Ellipsis = styled.span(
+  ({ theme: { colors } }) => css`
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: flex-end;
+
+    ${commonStyles({ colors })}
+  `
 );
 
-const Ellipsis = styled(PaginationComponent.Ellipsis)(
-  ({ theme }) => `
-  a {
-    color: ${theme.colors.darkGrey};
-     &:focus{
-      box-shadow: none;
-    }
-    @media all and (max-width: ${theme.breakpoints.sm}){
-      padding: .5rem;
-    }
-  }
-`
-);
+const Pagination = ({ pageCount, page: currentPage }) => {
+  const pagesArray = new Array(pageCount).fill(0).map((x, i) => i + 1);
 
-const Pagination = ({ pages = 20 }) => {
+  const pageItems = pagesArray.map(page => (
+    <PaginationItem active={+currentPage === page}>
+      <Link to={`?page=${page}`}>
+        <Item>{page}</Item>
+      </Link>
+    </PaginationItem>
+  ));
+
   return (
     <PaginationWrapper>
-      <PaginationPrev />
-      <PaginationItem>{1}</PaginationItem>
+      <PaginationAction disable={currentPage === 1}>
+        <Link to={`?page=${currentPage - 1}`}>
+          <IconWrapper>
+            <FaAngleLeft />
+          </IconWrapper>
+        </Link>
+      </PaginationAction>
 
-      <Ellipsis />
+      {pageItems}
 
-      <PaginationItem>{pages / 2 - 1}</PaginationItem>
-      <PaginationItem>{pages / 2}</PaginationItem>
-      <PaginationItem active>{pages / 2 + 1}</PaginationItem>
-
-      <Ellipsis />
-
-      <PaginationItem>{pages}</PaginationItem>
-      <PaginationNext />
+      <PaginationAction disable={currentPage === pageCount}>
+        <Link to={`?page=${currentPage + 1}`}>
+          <IconWrapper>
+            <FaAngleRight />
+          </IconWrapper>
+        </Link>
+      </PaginationAction>
     </PaginationWrapper>
   );
 };

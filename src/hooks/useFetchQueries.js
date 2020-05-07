@@ -1,11 +1,14 @@
 import { useEffect, useState, useCallback } from "react";
-
+import { parse } from "query-string";
 import axios from "axios";
 
 const useFetchQueries = ({ tables, byHost }) => {
-  const [queries, setQueries] = useState([]);
+  const [queriesData, setQueriesData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const { page } = parse(window.location.search);
 
   const getQueries = useCallback(() => {
     const tableParams = JSON.stringify(tables.map(({ label }) => label));
@@ -13,25 +16,25 @@ const useFetchQueries = ({ tables, byHost }) => {
 
     axios
       .get(
-        `http://localhost:5000/queries?host=${byHost}&search_tables=${tableParams}`
+        `${apiUrl}/queries?host=${byHost}&search_tables=${tableParams}&page=${page}`
       )
       .then(({ data }) => {
-        setQueries(data);
+        setQueriesData(data);
         setError("");
         setLoading(false);
       })
       .catch(e => {
-        setQueries([]);
+        setQueriesData([]);
         setError(e.message);
         setLoading(false);
       });
-  }, [byHost, tables]);
+  }, [byHost, tables, page]);
 
   useEffect(() => {
     getQueries();
-  }, [byHost]);
+  }, [byHost, page]);
 
-  return { queries, loading, error, getQueries };
+  return { queriesData, loading, error, getQueries };
 };
 
 export default useFetchQueries;

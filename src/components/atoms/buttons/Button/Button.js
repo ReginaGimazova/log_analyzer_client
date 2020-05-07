@@ -5,13 +5,14 @@ const MyButton = styled.button(
   ({ theme, theme: { colors, breakpoints }, active, customStyles }) => css`
     width: max-content;
     min-width: 150px;
+    padding: 10px 20px;
     border-radius: 3px;
     background-color: ${active ? colors.lightGrey : colors.white};
     color: ${colors.darkGrey};
+    font-size: 1rem;
     cursor: pointer;
     font-weight: ${active ? "bold" : "normal"};
     transition: all 0.8s ease;
-    padding: 10px 20px;
 
     &:hover,
     &:focus {

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import MainTemplate from "../../templates/MainTemplate";
-import SqlAnalyzeSection from "./SqlAnalyzeSection";
-import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
+import SqlAnalyzeSection from "../../organisms/SqlAnalyzeSection";
 import StartLogAnalyzeButton from "../../atoms/buttons/StartLogAnalyzeButton";
 import useInsertProgress from "../../../hooks/useInsertProgress";
 import ProgressBar from "../../molecules/ProgressBar";
+
+import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
 
 const OriginalDumpAnalyzePage = () => {
   const [byHost, setByHost] = useState(false);
@@ -23,6 +24,8 @@ const OriginalDumpAnalyzePage = () => {
 
   const { fetchProgress, progress } = useInsertProgress();
 
+  const { queries } = data;
+
   const menuItems = [
     {
       title: "grouped by sql",
@@ -38,8 +41,10 @@ const OriginalDumpAnalyzePage = () => {
 
   const onStartAnalyze = event => {
     event.preventDefault();
-    axios.post("http://localhost:5000/start");
-    fetchProgress();
+    if (window.confirm("Do you want to start analyze query log?")) {
+      axios.post("http://localhost:5000/start");
+      fetchProgress();
+    }
   };
 
   useEffect(() => {
@@ -54,13 +59,15 @@ const OriginalDumpAnalyzePage = () => {
       pageTitle="Original dump analyze"
       menuItems={menuItems}
       loading={loading}
-      isData={data.length}
+      isData={queries.length}
       error={error}
       topRight={<StartLogAnalyzeButton onClick={onStartAnalyze} />}
     >
-      {!data.length && !loading && !error && <ProgressBar percent={progress} />}
+      {!queries.length && !loading && !error && (
+        <ProgressBar percent={progress} />
+      )}
 
-      {data.length > 0 && (
+      {queries.length > 0 && (
         <SqlAnalyzeSection
           byHost={byHost}
           data={data}

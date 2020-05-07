@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const useConfigurationData = () => {
   const [configData, setConfigData] = useState([]);
@@ -11,7 +11,7 @@ const useConfigurationData = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5000/configuration`)
+      .get(`${apiUrl}/configuration`)
       .then(({ data }) => {
         setConfigData(data);
         setError("");

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const useInsertProgress = () => {
   const [progress, setProgress] = useState(0);
   const [currentInterval, setCurrentInterval] = useState(0);
@@ -8,7 +10,7 @@ const useInsertProgress = () => {
   const fetchProgress = () => {
     const interval = setInterval(() => {
       axios
-        .get("http://localhost:5000/progress")
+        .get(`${apiUrl}/progress`)
         .then(({ data }) => {
           setProgress(data);
         })

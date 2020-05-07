@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import QueriesList from "../../../molecules/QueriesList";
-import Subtitle from "../../../atoms/Subtitle/Subtitle";
-import TableSearch from "../../../molecules/TableSearch";
-import Message from "../../../atoms/Message";
+import QueriesList from "../../molecules/QueriesList";
+import Subtitle from "../../atoms/Subtitle/Subtitle";
+import TableSearch from "../../molecules/TableSearch";
+import Message from "../../atoms/Message";
+import Pagination from "../../molecules/Pagination";
 
 const Section = styled.section`
   margin: 50px 0;
@@ -17,6 +18,8 @@ const SqlAnalyzeSection = ({
   chosenTables,
   reSearchQueries
 }) => {
+  const { queries, page_count: pageCount, page } = data;
+
   const onTablesChoose = currentTables => {
     setChosenTables(currentTables || []);
   };
@@ -36,7 +39,8 @@ const SqlAnalyzeSection = ({
         Parametrized statements grouped by{" "}
         {byHost ? "SQL and User Host" : "SQL"}{" "}
       </Subtitle>
-      <QueriesList isAnalyzerPage queries={data} />
+      <QueriesList isAnalyzerPage queries={queries} />
+      <Pagination pageCount={pageCount} page={page} />
     </Section>
   );
 };

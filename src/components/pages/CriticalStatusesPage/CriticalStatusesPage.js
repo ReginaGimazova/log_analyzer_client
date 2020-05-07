@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
-import StatusesPageSection from "./StatusesPageSection";
+import StatusesPageSection from "../../organisms/StatusesPageSection";
 
 const queries = [
   {

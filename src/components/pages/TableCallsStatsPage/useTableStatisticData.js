@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const useTableStatisticData = () => {
   const [tableData, setTableData] = useState([]);
@@ -12,7 +12,7 @@ const useTableStatisticData = () => {
     setLoading(true);
 
     axios
-      .get(`http://localhost:5000/tables`)
+      .get(`${apiUrl}/tables`)
       .then(({ data }) => {
         const preparedData = data.map(value => ({
           name: value.table_name,

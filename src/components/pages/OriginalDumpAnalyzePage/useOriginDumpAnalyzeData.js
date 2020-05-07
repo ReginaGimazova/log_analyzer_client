@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useFetchQueries from "../../../hooks/useFetchQueries";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
   const [tables, setTables] = useState([]);
@@ -10,7 +10,7 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
 
   const getTables = () => {
     axios
-      .get("http://localhost:5000/tables")
+      .get(`${apiUrl}/tables`)
       .then(({ data }) => {
         setTables(data);
         setTablesError("");
@@ -21,7 +21,7 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
       });
   };
 
-  const { queries, loading, error, getQueries } = useFetchQueries({
+  const { queriesData, loading, error, getQueries } = useFetchQueries({
     tables: chosenTables,
     byHost
   });
@@ -30,8 +30,13 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
     getTables();
   }, []);
 
+  const defaultData = {
+    page: 1,
+    pageCount: undefined,
+    queries: []
+  };
   return {
-    data: queries,
+    data: queriesData || defaultData,
     loading,
     error,
     tables,
