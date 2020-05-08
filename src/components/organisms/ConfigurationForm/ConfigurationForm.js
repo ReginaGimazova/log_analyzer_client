@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled, { css } from "styled-components";
-import Button from "../../../atoms/buttons/Button";
-import Checkbox from "../../../atoms/Checkbox";
+
+import Button from "../../atoms/buttons/Button";
+import Checkbox from "../../atoms/Checkbox";
 import getActiveStatuses from "./getActivestatuses";
 
 const InputWrapper = styled.div`
@@ -28,25 +29,32 @@ const customStyles = ({ colors }) => css`
   }
 `;
 
-const ConfigurationForm = ({ configs }) => {
+const ConfigurationForm = ({ configs, updateConfig }) => {
   const activeStatuses = getActiveStatuses({ statuses: configs });
 
-  const [statuses, setStatuses] = useState(activeStatuses || undefined);
+  const [statuses, setStatuses] = useState(activeStatuses || []);
 
   const handleCheck = event => {
     const { value, checked } = event.target;
 
     const updatedCheckedFeatures = checked
-      ? [...statuses, +value]
-      : statuses.filter(item => item !== +value);
+      ? [...statuses, configs.find(item => item.value === value)]
+      : statuses.filter(item => item.value !== value);
+
     setStatuses(updatedCheckedFeatures);
   };
 
+  const applyConfig = useCallback(() => {
+    const ids = statuses.map(item => item.id);
+    updateConfig(ids);
+  }, [statuses]);
+
   const getCheckbox = ({ id, value }) => {
     let isChecked = false;
-    if (statuses) {
-      isChecked = !!statuses.find(item => item === +id);
+    if (statuses.length) {
+      isChecked = !!statuses.find(item => item.id === +id);
     }
+
     return (
       <InputWrapper key={id}>
         <Checkbox
@@ -64,7 +72,9 @@ const ConfigurationForm = ({ configs }) => {
   return (
     <form>
       {configs.map(item => getCheckbox({ id: item.id, value: item.value }))}
-      <Button customStyles={customStyles}>Apply</Button>
+      <Button customStyles={customStyles} onClick={applyConfig}>
+        Apply
+      </Button>
     </form>
   );
 };

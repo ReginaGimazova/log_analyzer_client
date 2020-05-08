@@ -8,6 +8,22 @@ const useConfigurationData = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const updateConfig = ids => {
+    setLoading(true);
+    axios
+      .post(`${apiUrl}/configuration`, { status_ids: ids })
+      .then(({ data }) => {
+        setConfigData(data);
+        setError("");
+        setLoading(false);
+      })
+      .catch(e => {
+        setConfigData(configData);
+        setError(e.message);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -24,7 +40,7 @@ const useConfigurationData = () => {
       });
   }, []);
 
-  return { data: configData, loading, error };
+  return { data: configData, loading, error, updateConfig };
 };
 
 export default useConfigurationData;

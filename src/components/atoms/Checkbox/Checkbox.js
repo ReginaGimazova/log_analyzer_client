@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { MdCheck } from "react-icons/md";
 
 const Label = styled.label`
   display: flex;
@@ -12,23 +13,17 @@ const Label = styled.label`
 
 const DefaultCheckbox = styled.input(
   ({ theme: { colors } }) => css`
-  position: absolute;
-  top: 0.125rem;
-  left: 0;
-  cursor: pointer;
-  opacity: 0;
-  
-  + span {
-    background-color: transparent;
-    border: 0.0625rem solid #adadad;
-  }
-  &:checked + span {
-      background: ${colors.blue} url('/src/static/icons/checkmark.svg') center no-repeat;
-      background-size: 0.8rem;
-      border: 0.0625rem solid ${colors.blue};
+    position: absolute;
+    top: 0.125rem;
+    left: 0;
+    cursor: pointer;
+    opacity: 0;
+
+    + span {
+      background-color: transparent;
+      border: 0.0625rem solid #adadad;
     }
-  }
-`
+  `
 );
 
 const CustomCheckbox = styled.span`
@@ -52,7 +47,14 @@ const Checkbox = ({ onChange, value, checked, children, id }) => (
       checked={checked}
       id={id}
     />
-    <CustomCheckbox checked={checked} />
+    {checked ? (
+      <CustomCheckbox checked={checked}>
+        <MdCheck />
+      </CustomCheckbox>
+    ) : (
+      <CustomCheckbox checked={checked} />
+    )}
+
     {children}
   </Label>
 );

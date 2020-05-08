@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
 import MainTemplate from "../../templates/MainTemplate";
-import ConfigurationForm from "./ConfigurationForm";
+import ConfigurationForm from "../../organisms/ConfigurationForm";
 import useConfigurationData from "./useConfigurationData";
-import Loader from "../../molecules/loaders/Loader";
-import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
+
+const Section = styled.section`
+  margin: 50px 0;
+`;
 
 const types = {
   EXPLAIN: "EXPLAIN",
@@ -12,7 +16,7 @@ const types = {
 };
 
 const ConfigurationPage = () => {
-  const { data, loading, error } = useConfigurationData();
+  const { data, loading, error, updateConfig } = useConfigurationData();
 
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
 
@@ -34,14 +38,21 @@ const ConfigurationPage = () => {
   );
 
   return (
-    <MainTemplate pageTitle="Configuration" menuItems={menuItems}>
-      {loading && <Loader />}
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+    <MainTemplate
+      pageTitle="Configuration"
+      menuItems={menuItems}
+      loading={loading}
+      error={error}
+      isData={data.length}
+    >
       {data.length > 0 && (
-        <>
+        <Section>
           <Subtitle>{currentType} statuses configuration</Subtitle>
-          <ConfigurationForm configs={configForCurrentCommandType} />
-        </>
+          <ConfigurationForm
+            configs={configForCurrentCommandType}
+            updateConfig={updateConfig}
+          />
+        </Section>
       )}
     </MainTemplate>
   );
