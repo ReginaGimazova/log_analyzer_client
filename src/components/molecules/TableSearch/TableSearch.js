@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import styled, { css } from "styled-components";
 
-import selectCustomStyles from "./customStyles";
+import selectCustomStyles from "../../../static/styles/customStyles";
 import tablesForSelect from "../../../utils/tablesForSelect";
 import SearchButton from "../../atoms/buttons/SearchButton";
 

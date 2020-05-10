@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import QueriesList from "../../molecules/QueriesList";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
 import TableSearch from "../../molecules/TableSearch";
@@ -8,6 +8,10 @@ import Pagination from "../../molecules/Pagination";
 
 const Section = styled.section`
   margin: 50px 0;
+`;
+
+const customMessageStyle = css`
+  margin-bottom: 10px;
 `;
 
 const SqlAnalyzeSection = ({
@@ -27,7 +31,9 @@ const SqlAnalyzeSection = ({
   return (
     <Section>
       {chosenTables.length === 0 && (
-        <Message>By default, all tables will be searched</Message>
+        <Message customStyles={customMessageStyle}>
+          By default, all tables will be searched
+        </Message>
       )}
       <TableSearch
         allTables={tables}

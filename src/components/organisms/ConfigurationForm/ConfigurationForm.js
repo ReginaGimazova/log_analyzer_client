@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import Button from "../../atoms/buttons/Button";
 import Checkbox from "../../atoms/Checkbox";
 import getActiveStatuses from "./getActivestatuses";
+import SubmitButton from "../../atoms/buttons/SubmitButton";
 
 const InputWrapper = styled.div`
   display: flex;
@@ -14,18 +14,6 @@ const InputWrapper = styled.div`
 
   &:not(:last-child) {
     margin-bottom: 10px;
-  }
-`;
-
-const customStyles = ({ colors }) => css`
-  margin-top: 20px;
-  padding: 5px;
-  background-color: ${colors.green};
-  color: ${colors.white};
-
-  &:hover,
-  &:focus {
-    background-color: ${colors.darkGreen};
   }
 `;
 
@@ -72,9 +60,7 @@ const ConfigurationForm = ({ configs, updateConfig }) => {
   return (
     <form>
       {configs.map(item => getCheckbox({ id: item.id, value: item.value }))}
-      <Button customStyles={customStyles} onClick={applyConfig}>
-        Apply
-      </Button>
+      <SubmitButton onClick={applyConfig}>Apply</SubmitButton>
     </form>
   );
 };

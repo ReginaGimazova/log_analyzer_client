@@ -24,6 +24,27 @@ const useConfigurationData = () => {
       });
   };
 
+  const addNewStatus = statusData => {
+    setLoading(true);
+    const { value, configType } = statusData;
+    axios
+      .post(`${apiUrl}/configuration/new`, {
+        value,
+        type: configType,
+        status: 1
+      })
+      .then(({ data }) => {
+        setConfigData(data);
+        setError("");
+        setLoading(false);
+      })
+      .catch(e => {
+        setConfigData(configData);
+        console.log(e);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -40,7 +61,7 @@ const useConfigurationData = () => {
       });
   }, []);
 
-  return { data: configData, loading, error, updateConfig };
+  return { data: configData, loading, error, updateConfig, addNewStatus };
 };
 
 export default useConfigurationData;

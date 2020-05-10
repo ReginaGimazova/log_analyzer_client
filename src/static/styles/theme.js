@@ -9,7 +9,8 @@ const theme = {
     darkGreen: "#556e3b",
     red: "#a5131d",
     lightRed: "#a56a6b",
-    blue: "#356e9a"
+    blue: "#356e9a",
+    yellow: "#fbc11a"
   },
   breakpoints: {
     sm: "576px",
