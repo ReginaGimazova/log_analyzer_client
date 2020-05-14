@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import Input from "../../atoms/Input";
 import selectCustomStyles from "../../../static/styles/customStyles";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const Form = styled.form(
   ({ theme: { breakpoints } }) => css`
@@ -19,7 +20,13 @@ const InputWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-const NewStatusForm = ({ addNewStatus }) => {
+const ErrorMessageWrapper = styled.div`
+  margin-top: 30px;
+`;
+
+const duplicationErrorMessage = "This status already exists";
+
+const NewStatusForm = ({ addNewStatus, configs }) => {
   const configTypes = [
     {
       value: "Explain",
@@ -33,13 +40,39 @@ const NewStatusForm = ({ addNewStatus }) => {
 
   const [configType, setConfigType] = useState(configTypes[0]);
   const [value, setValue] = useState("");
+  const [duplicateError, setDuplicateError] = useState("");
 
   const onValueChange = event => {
     setValue(event.target.value);
   };
 
+  const checkStatusExist = statusValue => {
+    return configs.find(
+      ({ value: configValue, type }) =>
+        statusValue === configValue &&
+        configType.value.toUpperCase() === type.toUpperCase()
+    );
+  };
+
+  const onBlurValue = event => {
+    const alreadyExist = checkStatusExist(event.target.value);
+    if (alreadyExist) {
+      setDuplicateError(duplicationErrorMessage);
+    } else {
+      setDuplicateError("");
+    }
+  };
+
   const onSubmit = event => {
     event.preventDefault();
+    const alreadyExist = checkStatusExist(value);
+    if (alreadyExist) {
+      setDuplicateError(duplicationErrorMessage);
+      return;
+    }
+
+    setDuplicateError("");
+
     addNewStatus({
       value,
       configType: configType.value
@@ -54,6 +87,7 @@ const NewStatusForm = ({ addNewStatus }) => {
         <Input
           value={value}
           onChange={onValueChange}
+          onBlur={onBlurValue}
           placeholder="Status value"
         />
       </InputWrapper>
@@ -63,6 +97,11 @@ const NewStatusForm = ({ addNewStatus }) => {
         onChange={setConfigType}
         styles={selectCustomStyles}
       />
+      {duplicateError && (
+        <ErrorMessageWrapper>
+          <ErrorMessage>{duplicateError}</ErrorMessage>
+        </ErrorMessageWrapper>
+      )}
       <SubmitButton onClick={onSubmit}>Add status</SubmitButton>
     </Form>
   );

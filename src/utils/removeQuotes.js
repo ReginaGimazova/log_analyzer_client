@@ -1,5 +1,8 @@
 const removeQuotes = text => {
-  return text.replace(/`/g, "");
+  if (text) {
+    return text.replace(/`/g, "");
+  }
+  return text;
 };
 
 export default removeQuotes;

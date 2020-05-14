@@ -32,10 +32,14 @@ const ConfigurationForm = ({ configs, updateConfig }) => {
     setStatuses(updatedCheckedFeatures);
   };
 
-  const applyConfig = useCallback(() => {
-    const ids = statuses.map(item => item.id);
-    updateConfig(ids);
-  }, [statuses]);
+  const applyConfig = useCallback(
+    event => {
+      event.preventDefault();
+      const ids = statuses.map(item => item.id);
+      updateConfig(ids);
+    },
+    [statuses]
+  );
 
   const getCheckbox = ({ id, value }) => {
     let isChecked = false;
