@@ -35,6 +35,7 @@ const useOriginDumpAnalyzeData = (byHost = false, chosenTables = []) => {
     pageCount: undefined,
     queries: []
   };
+
   return {
     data: queriesData || defaultData,
     loading,

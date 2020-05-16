@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import removeQuotes from "../../../utils/removeQuotes";
+import StatusList from "../StatusList";
 
 const List = styled.ul`
   margin-top: 3rem;
@@ -41,15 +42,24 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
         <span>{queries.length} Queries</span>
         {isAnalyzerPage && <span>Execution counts</span>}
       </ListHeader>
-      {queries.map(({ query_count, parsed_query }, index) => (
-        <div key={index}>
-          <ListItem>
-            <Text>{removeQuotes(parsed_query)}</Text>
-            {isAnalyzerPage && <Count>{query_count}</Count>}
-          </ListItem>
-          {/* {!isAnalyzerPage && <StatusList statuses={item.critical_statuses} />}*/}
-        </div>
-      ))}
+      {queries.map(
+        (
+          {
+            query_count: queryCount,
+            parsed_query: parsedQuery,
+            critical_statuses: criticalStatuses
+          },
+          index
+        ) => (
+          <div key={index}>
+            <ListItem>
+              <Text>{removeQuotes(parsedQuery)}</Text>
+              {isAnalyzerPage && <Count>{queryCount}</Count>}
+            </ListItem>
+            {!isAnalyzerPage && <StatusList statuses={criticalStatuses} />}
+          </div>
+        )
+      )}
     </List>
   );
 };

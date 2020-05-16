@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "../../organisms/StatusesPageSection";
+import useExplainInfoData from "./useExplainInfoData";
 
 const queries = [
   {
@@ -37,6 +38,10 @@ const types = {
 const CriticalStatusesPage = () => {
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
 
+  const { getExplainInfo, loading, explainInfo, error } = useExplainInfoData(
+    []
+  );
+
   const menuItems = [
     {
       title: "Show Explain statuses",
@@ -51,8 +56,15 @@ const CriticalStatusesPage = () => {
   ];
 
   return (
-    <MainTemplate pageTitle="Critical statuses" menuItems={menuItems}>
-      <StatusesPageSection queries={queries} type={currentType} />
+    <MainTemplate
+      pageTitle="Critical statuses"
+      menuItems={menuItems}
+      error={error}
+      loading={loading}
+    >
+      {queries.length > 0 && (
+        <StatusesPageSection queries={explainInfo} type={currentType} />
+      )}
     </MainTemplate>
   );
 };

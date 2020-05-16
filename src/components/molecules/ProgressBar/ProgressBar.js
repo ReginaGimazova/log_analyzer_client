@@ -3,16 +3,16 @@ import styled, { css } from "styled-components";
 
 const BarContainer = styled.div(
   ({ theme: { colors } }) => css`
-    height: 30px;
-    width: 500px;
+    height: 10px;
+    width: 100%;
     margin-top: 50px;
-    border: 1px solid ${colors.darkGrey};
+    background-color: ${colors.lightGrey};
   `
 );
 
 const Filler = styled.div(
   ({ theme: { colors }, percent }) => css`
-    height: 100%;
+    height: inherit;
     width: ${percent}%;
     background-color: ${colors.green};
     transition: width 0.2s ease-in;

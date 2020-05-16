@@ -1,39 +1,38 @@
 import React from "react";
 import styled from "styled-components";
+import { AiFillExclamationCircle } from "react-icons/all";
 
 const List = styled.ul`
   padding: 20px 0;
 `;
 
 const Item = styled.li`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   color: ${({ theme }) => theme.colors.red};
   font-weight: bold;
 `;
 
-const Icon = styled.span(
-  ({ theme }) => `
+const Icon = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 23px;
-  height: 23px;
   margin-right: 10px;
-  padding-top: 3px;
-  border: 2px solid ${theme.colors.red};
-  border-radius: 50%;
-  color: ${theme.colors.red};
-  font-weight: bold;
-`
-);
+  font-size: 1.8rem;
+  color: ${({ theme }) => theme.colors.red};
+`;
 
 const StatusList = ({ statuses }) => {
+  const statusesArray = [].concat(statuses);
+
   return (
     <List>
-      {statuses.map(status => (
-        <Item key={status.id}>
-          <Icon>!</Icon>
-          {status.name}
+      {statusesArray.map((status, index) => (
+        <Item key={index}>
+          <Icon>
+            <AiFillExclamationCircle />
+          </Icon>
+          {status}
         </Item>
       ))}
     </List>
