@@ -22,6 +22,7 @@ const useInsertProgress = () => {
   useEffect(() => {
     if (progress === 100) {
       clearInterval(currentInterval);
+      setProgress(0);
     }
   }, [progress]);
 
