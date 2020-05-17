@@ -22,7 +22,12 @@ const Icon = styled.span`
   color: ${({ theme }) => theme.colors.red};
 `;
 
-const StatusList = ({ statuses }) => {
+const Duration = styled.span`
+  display: inline-block;
+  margin-left: 3px;
+`;
+
+const StatusList = ({ statuses, duration }) => {
   const statusesArray = [].concat(statuses);
 
   return (
@@ -33,6 +38,7 @@ const StatusList = ({ statuses }) => {
             <AiFillExclamationCircle />
           </Icon>
           {status}
+          {duration && <Duration>- Duration: {duration}</Duration>}
         </Item>
       ))}
     </List>

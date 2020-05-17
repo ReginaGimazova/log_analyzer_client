@@ -3,9 +3,7 @@ import styled from "styled-components";
 import removeQuotes from "../../../utils/removeQuotes";
 import StatusList from "../StatusList";
 
-const List = styled.ul`
-  margin-top: 3rem;
-`;
+const List = styled.ul``;
 
 const ListItem = styled.li`
   display: flex;
@@ -47,7 +45,8 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
           {
             query_count: queryCount,
             parsed_query: parsedQuery,
-            critical_statuses: criticalStatuses
+            critical_statuses: criticalStatuses,
+            duration
           },
           index
         ) => (
@@ -56,7 +55,9 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
               <Text>{removeQuotes(parsedQuery)}</Text>
               {isAnalyzerPage && <Count>{queryCount}</Count>}
             </ListItem>
-            {!isAnalyzerPage && <StatusList statuses={criticalStatuses} />}
+            {!isAnalyzerPage && (
+              <StatusList statuses={criticalStatuses} duration={duration} />
+            )}
           </div>
         )
       )}

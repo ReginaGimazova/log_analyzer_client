@@ -50,7 +50,7 @@ const ConfigurationPage = () => {
       menuItems={menuItems}
       loading={loading}
       error={error}
-      isData={data.length}
+      hasData={data.length}
     >
       <Section>
         <Subtitle>Add status</Subtitle>

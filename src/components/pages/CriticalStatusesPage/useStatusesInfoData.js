@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import types from "./types";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const useExplainInfoData = (chosenTables = []) => {
-  const [explainInfo, setExplainInfo] = useState([]);
+const useStatusesInfoData = (chosenTables = [], analyzeType) => {
+  const [statuses, setStatuses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const tableParams = JSON.stringify(chosenTables.map(({ label }) => label));
 
-  const getExplainInfo = () => {
+  const fetchString =
+    analyzeType === types.EXPLAIN ? `${apiUrl}/explain` : `${apiUrl}/profile`;
+
+  const getStatusesInfo = () => {
     setLoading(true);
 
     axios
-      .get(`${apiUrl}/explain`)
+      .get(fetchString)
       .then(({ data }) => {
-        setExplainInfo(data);
+        setStatuses(data);
         setError("");
         setLoading(false);
       })
       .catch(e => {
-        setExplainInfo([]);
+        setStatuses([]);
         setError(e.message);
         setLoading(false);
       });
   };
 
   useEffect(() => {
-    getExplainInfo();
-  }, []);
+    getStatusesInfo();
+  }, [analyzeType]);
 
-  return { getExplainInfo, explainInfo, error, loading };
+  return { getStatusesInfo, statuses, error, loading };
 };
 
-export default useExplainInfoData;
+export default useStatusesInfoData;
