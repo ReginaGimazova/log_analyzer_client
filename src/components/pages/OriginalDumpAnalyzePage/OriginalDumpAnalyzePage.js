@@ -69,7 +69,7 @@ const OriginalDumpAnalyzePage = () => {
       pageTitle="Original dump analyze"
       menuItems={menuItems}
       loading={loading}
-      isData={queries && queries.length}
+      hasData={queries && queries.length}
       error={error}
       topRight={<StartLogAnalyzeButton onClick={onStartAnalyze} />}
     >

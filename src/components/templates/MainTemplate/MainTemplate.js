@@ -55,7 +55,7 @@ const MainTemplate = ({
   pageTitle,
   menuItems,
   loading,
-  isData,
+  hasData,
   error,
   topRight
 }) => (
@@ -72,10 +72,10 @@ const MainTemplate = ({
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
         {loading &&
-          (!isData ? (
+          (!hasData ? (
             <Loader customStyles={loaderCustomStyles} />
           ) : (
-            <OverlayLoader data={isData} />
+            <OverlayLoader data={hasData} />
           ))}
 
         {children}
