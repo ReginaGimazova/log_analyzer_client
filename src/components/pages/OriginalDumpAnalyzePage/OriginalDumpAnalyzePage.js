@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { css } from "styled-components";
 
 import MainTemplate from "../../templates/MainTemplate";
 import SqlAnalyzeSection from "../../organisms/SqlAnalyzeSection";
 import StartLogAnalyzeButton from "../../atoms/buttons/StartLogAnalyzeButton";
-import useInsertProgress from "../../../hooks/useInsertProgress";
+import useAnalyzeProgress from "../../../hooks/useAnalyzeProgress";
 import ProgressBar from "../../molecules/ProgressBar";
 
 import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
 import Message from "../../atoms/Message";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const customMessageStyles = css`
   margin-top: 50px;
@@ -21,16 +21,12 @@ const OriginalDumpAnalyzePage = () => {
   const [chosenTables, setChosenTables] = useState([]);
   const [progressBarIsShown, setProgressBarIsShown] = useState(false);
 
-  const {
-    data,
-    loading,
-    error,
-    tables,
-    getQueries,
-    getTables
-  } = useOriginDumpAnalyzeData(byHost, chosenTables);
+  const { data, loading, error, getQueries } = useOriginDumpAnalyzeData(
+    byHost,
+    chosenTables
+  );
 
-  const { fetchProgress, progress } = useInsertProgress();
+  const { startProgress, progress, progressError } = useAnalyzeProgress();
 
   const { queries = [] } = data;
 
@@ -47,22 +43,29 @@ const OriginalDumpAnalyzePage = () => {
     }
   ];
 
-  const onStartAnalyze = event => {
-    event.preventDefault();
+  const onStartAnalyze = () => {
     if (window.confirm("Do you want to start analyze query log?")) {
       setProgressBarIsShown(true);
-      axios.post("http://localhost:5000/start");
-      fetchProgress();
+      startProgress();
     }
+  };
+
+  const onTablesChoose = currentTables => {
+    setChosenTables(currentTables || []);
   };
 
   useEffect(() => {
     if (progress === 100) {
       setProgressBarIsShown(false);
       getQueries();
-      getTables();
     }
   }, [progress]);
+
+  useEffect(() => {
+    if (progressError) {
+      setProgressBarIsShown(false);
+    }
+  }, [progressError]);
 
   return (
     <MainTemplate
@@ -82,13 +85,18 @@ const OriginalDumpAnalyzePage = () => {
         </Message>
       )}
 
+      {progressError && (
+        <ErrorMessage additionalStyles={customMessageStyles}>
+          {progressError}
+        </ErrorMessage>
+      )}
+
       {queries.length > 0 && (
         <SqlAnalyzeSection
           byHost={byHost}
           data={data}
-          tables={tables}
           chosenTables={chosenTables}
-          setChosenTables={setChosenTables}
+          onTablesChoose={onTablesChoose}
           reSearchQueries={getQueries}
         />
       )}

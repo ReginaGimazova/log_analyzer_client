@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Checkbox from "../../atoms/Checkbox";
@@ -18,9 +18,7 @@ const InputWrapper = styled.div`
 `;
 
 const ConfigurationForm = ({ configs, updateConfig }) => {
-  const activeStatuses = getActiveStatuses({ statuses: configs });
-
-  const [statuses, setStatuses] = useState(activeStatuses || []);
+  const [statuses, setStatuses] = useState([]);
 
   const handleCheck = event => {
     const { value, checked } = event.target;
@@ -41,11 +39,12 @@ const ConfigurationForm = ({ configs, updateConfig }) => {
     [statuses]
   );
 
+  useEffect(() => {
+    setStatuses(getActiveStatuses({ statuses: configs }));
+  }, [configs]);
+
   const getCheckbox = ({ id, value }) => {
-    let isChecked = false;
-    if (statuses.length) {
-      isChecked = !!statuses.find(item => item.id === +id);
-    }
+    const isChecked = !!statuses.find(item => item.id === +id);
 
     return (
       <InputWrapper key={id}>

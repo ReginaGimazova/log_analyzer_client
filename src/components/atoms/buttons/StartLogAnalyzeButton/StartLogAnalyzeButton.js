@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { css } from "styled-components";
 
 import Button from "../Button";
@@ -21,10 +21,25 @@ const customStyles = ({ colors, breakpoints }) => css`
   }
 `;
 
-const StartLogAnalyzeButton = ({ onClick }) => (
-  <Button type="submit" onClick={onClick} customStyles={customStyles}>
-    Start log analyze
-  </Button>
-);
+const StartLogAnalyzeButton = ({ onClick }) => {
+  const [disabled, setDisabled] = useState(false);
+
+  const onSubmit = event => {
+    event.preventDefault();
+    onClick();
+    setDisabled(true);
+  };
+
+  return (
+    <Button
+      type="submit"
+      onClick={onSubmit}
+      customStyles={customStyles}
+      disabled={disabled}
+    >
+      Start log analyze
+    </Button>
+  );
+};
 
 export default StartLogAnalyzeButton;

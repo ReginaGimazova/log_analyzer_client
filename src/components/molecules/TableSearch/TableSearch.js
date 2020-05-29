@@ -5,6 +5,9 @@ import styled, { css } from "styled-components";
 import selectCustomStyles from "../../../static/styles/customStyles";
 import tablesForSelect from "../../../utils/tablesForSelect";
 import SearchButton from "../../atoms/buttons/SearchButton";
+import Message from "../../atoms/Message";
+import useTables from "../../../hooks/useTables";
+import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 
 const SelectWrapper = styled.div`
   display: inline-block;
@@ -27,25 +30,42 @@ const Search = styled.div(
   `
 );
 
-const TableSearch = ({ chosenTables, allTables, onChange, action }) => {
-  const dataForSelect = tablesForSelect(allTables);
+const customMessageStyle = css`
+  margin-bottom: 10px;
+`;
+
+const TableSearch = ({ chosenTables = [], onChange, action }) => {
+  const { tables, tablesError } = useTables();
+  const dataForSelect = tablesForSelect(tables);
+
+  if (tablesError) {
+    return <ErrorMessage>{tablesError}</ErrorMessage>;
+  }
 
   return (
-    <Search>
-      <SelectWrapper>
-        <Select
-          options={dataForSelect}
-          value={chosenTables}
-          onChange={onChange}
-          styles={selectCustomStyles}
-          isMulti
-          noOptionsMessage={() => "No tables"}
-          closeMenuOnSelect={false}
-          blurInputOnSelect={false}
-        />
-      </SelectWrapper>
-      <SearchButton onClick={action} />
-    </Search>
+    <>
+      {chosenTables.length === 0 && (
+        <Message customStyles={customMessageStyle}>
+          By default, all tables will be searched
+        </Message>
+      )}
+
+      <Search>
+        <SelectWrapper>
+          <Select
+            options={dataForSelect}
+            value={chosenTables}
+            onChange={onChange}
+            styles={selectCustomStyles}
+            isMulti
+            noOptionsMessage={() => "No tables"}
+            closeMenuOnSelect={false}
+            blurInputOnSelect={false}
+          />
+        </SelectWrapper>
+        <SearchButton onClick={action} />
+      </Search>
+    </>
   );
 };
 

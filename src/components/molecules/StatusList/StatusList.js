@@ -27,7 +27,7 @@ const Duration = styled.span`
   margin-left: 3px;
 `;
 
-const StatusList = ({ statuses, duration }) => {
+const StatusList = ({ statuses }) => {
   const statusesArray = [].concat(statuses);
 
   return (
@@ -38,7 +38,9 @@ const StatusList = ({ statuses, duration }) => {
             <AiFillExclamationCircle />
           </Icon>
           {status}
+          {/*
           {duration && <Duration>- Duration: {duration}</Duration>}
+*/}
         </Item>
       ))}
     </List>

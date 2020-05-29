@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 import Loader from "../Loader";
 
 const LoaderWrapper = styled.div(
-  ({ data }) => css`
-    position: absolute;
+  ({ data, theme: { colors } }) => css`
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     width: 100%;
-    background: #fff;
+    background: ${colors.white};
     z-index: 3;
     display: flex;
     align-items: center;

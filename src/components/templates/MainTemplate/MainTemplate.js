@@ -29,7 +29,7 @@ const Main = styled.main(
     padding: 50px;
 
     @media all and (max-width: ${theme.breakpoints.md}) {
-      padding: 30px 30px 0;
+      padding: 30px 10px 0;
     }
   `
 );
@@ -48,6 +48,10 @@ const Top = styled.div(
 
 const loaderCustomStyles = () => css`
   margin-top: 50px;
+`;
+
+const errorAdditionalStyles = css`
+  margin-top: 20px;
 `;
 
 const MainTemplate = ({
@@ -69,7 +73,11 @@ const MainTemplate = ({
           {menuItems && <NavigationMenu menuItems={menuItems} />}
           {topRight && topRight}
         </Top>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {error && (
+          <ErrorMessage additionalStyles={errorAdditionalStyles}>
+            {error}
+          </ErrorMessage>
+        )}
 
         {loading &&
           (!hasData ? (

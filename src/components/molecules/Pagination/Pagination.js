@@ -70,6 +70,10 @@ const Pagination = ({ pageCount, page: currentPage }) => {
     </PaginationItem>
   ));
 
+  if (pageCount <= 1) {
+    return null;
+  }
+
   return (
     <PaginationWrapper>
       <PaginationAction disable={currentPage === 1}>

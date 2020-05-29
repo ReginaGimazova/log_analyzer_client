@@ -8,7 +8,7 @@ const useFetchQueries = ({ tables, byHost }) => {
   const [error, setError] = useState("");
 
   const apiUrl = process.env.REACT_APP_API_URL;
-  const { page } = parse(window.location.search);
+  const { page = 1 } = parse(window.location.search);
 
   const getQueries = useCallback(() => {
     const tableParams = JSON.stringify(tables.map(({ label }) => label));

@@ -6,11 +6,14 @@ import types from "./types";
 
 const CriticalStatusesPage = () => {
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
+  const [chosenTables, setChosenTables] = useState([]);
 
-  const { getStatusesInfo, loading, statuses, error } = useStatusesInfoData(
-    [],
+  const { getStatusesInfo, loading, statusesData, error } = useStatusesInfoData(
+    chosenTables,
     currentType
   );
+
+  const { queries = [], page, page_count: pageCount } = statusesData;
 
   const menuItems = [
     {
@@ -25,17 +28,27 @@ const CriticalStatusesPage = () => {
     }
   ];
 
+  const onTablesChoose = currentTables => {
+    setChosenTables(currentTables || []);
+  };
+
   return (
     <MainTemplate
       pageTitle="Critical statuses"
       menuItems={menuItems}
       error={error}
       loading={loading}
-      hasData={statuses.length}
+      hasData={queries.length}
     >
-      {statuses.length > 0 && (
-        <StatusesPageSection queries={statuses} type={currentType} />
-      )}
+      <StatusesPageSection
+        queries={queries}
+        type={currentType}
+        page={page}
+        pageCount={pageCount}
+        onTablesChoose={onTablesChoose}
+        chosenTables={chosenTables}
+        reSearchQueries={getStatusesInfo}
+      />
     </MainTemplate>
   );
 };

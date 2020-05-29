@@ -33,7 +33,7 @@ const Count = styled.span`
   color: ${({ theme }) => theme.colors.green};
 `;
 
-const QueriesList = ({ queries, isAnalyzerPage }) => {
+const QueriesList = ({ queries, isAnalyzerPage, type }) => {
   return (
     <List>
       <ListHeader>
@@ -45,18 +45,17 @@ const QueriesList = ({ queries, isAnalyzerPage }) => {
           {
             query_count: queryCount,
             parsed_query: parsedQuery,
-            critical_statuses: criticalStatuses,
-            duration
+            critical_statuses: criticalStatuses
           },
           index
         ) => (
           <div key={index}>
             <ListItem>
               <Text>{removeQuotes(parsedQuery)}</Text>
-              {isAnalyzerPage && <Count>{queryCount}</Count>}
+              <Count>{queryCount}</Count>
             </ListItem>
             {!isAnalyzerPage && (
-              <StatusList statuses={criticalStatuses} duration={duration} />
+              <StatusList statuses={criticalStatuses} type={type} />
             )}
           </div>
         )

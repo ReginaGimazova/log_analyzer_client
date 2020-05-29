@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import QueriesList from "../../molecules/QueriesList";
 import Button from "../../atoms/buttons/Button";
+import Pagination from "../../molecules/Pagination";
+import TableSearch from "../../molecules/TableSearch";
 
 const HighLightText = styled.p`
   margin-bottom: 30px;
@@ -37,7 +39,15 @@ const customButtonStyles = ({ colors, breakpoints }) => css`
   }
 `;
 
-const StatusesPageSection = ({ queries, type }) => {
+const StatusesPageSection = ({
+  queries,
+  type,
+  chosenTables,
+  reSearchQueries,
+  onTablesChoose,
+  pageCount,
+  page
+}) => {
   const title = `Run the command ${type} for all filtered queries`;
   const message = "Are you sure to do this.";
 
@@ -50,7 +60,19 @@ const StatusesPageSection = ({ queries, type }) => {
         Statements with critical statuses according to the
         <Link to="configuration">configuration</Link>
       </HighLightText>
-      <QueriesList isAnalyzerPage={false} queries={queries} />
+
+      <TableSearch
+        onChange={onTablesChoose}
+        chosenTables={chosenTables}
+        action={reSearchQueries}
+      />
+
+      {queries.length > 0 && (
+        <>
+          <QueriesList isAnalyzerPage={false} queries={queries} type={type} />
+          <Pagination pageCount={pageCount} page={page} />
+        </>
+      )}
     </>
   );
 };

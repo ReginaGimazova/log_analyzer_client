@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const MyButton = styled.button(
+const StyledButton = styled.button(
   ({ theme, theme: { colors, breakpoints }, active, customStyles }) => css`
     width: max-content;
     min-width: 150px;
@@ -36,19 +36,21 @@ const Button = ({
   onClick,
   className,
   active,
+  disabled,
   customStyles,
   type = "button"
 }) => {
   return (
-    <MyButton
+    <StyledButton
       onClick={onClick}
       className={className}
       active={active}
       customStyles={customStyles}
       type={type}
+      disabled={disabled}
     >
       {children}
-    </MyButton>
+    </StyledButton>
   );
 };
 

@@ -1,42 +1,26 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import QueriesList from "../../molecules/QueriesList";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
 import TableSearch from "../../molecules/TableSearch";
-import Message from "../../atoms/Message";
 import Pagination from "../../molecules/Pagination";
 
 const Section = styled.section`
   margin: 50px 0;
 `;
 
-const customMessageStyle = css`
-  margin-bottom: 10px;
-`;
-
 const SqlAnalyzeSection = ({
   byHost,
   data,
-  tables,
-  setChosenTables,
+  onTablesChoose,
   chosenTables,
   reSearchQueries
 }) => {
   const { queries, page_count: pageCount, page } = data;
 
-  const onTablesChoose = currentTables => {
-    setChosenTables(currentTables || []);
-  };
-
   return (
     <Section>
-      {chosenTables.length === 0 && (
-        <Message customStyles={customMessageStyle}>
-          By default, all tables will be searched
-        </Message>
-      )}
       <TableSearch
-        allTables={tables}
         onChange={onTablesChoose}
         chosenTables={chosenTables}
         action={reSearchQueries}
