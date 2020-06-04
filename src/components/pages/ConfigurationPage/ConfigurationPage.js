@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 
 import MainTemplate from "../../templates/MainTemplate";
@@ -6,6 +6,7 @@ import ConfigurationForm from "../../organisms/ConfigurationForm";
 import useConfigurationData from "./useConfigurationData";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
 import NewStatusForm from "../../organisms/NewStatusForm";
+import Message from "../../atoms/Message";
 
 const Section = styled.section`
   margin: 50px 0;
@@ -40,9 +41,9 @@ const ConfigurationPage = () => {
     }
   ];
 
-  const configForCurrentCommandType = data.filter(
-    status => status.type === currentType
-  );
+  const configForCurrentCommandType = useMemo(() => {
+    return data.filter(status => status.type === currentType);
+  }, [currentType, data]);
 
   return (
     <MainTemplate
@@ -50,7 +51,7 @@ const ConfigurationPage = () => {
       menuItems={menuItems}
       loading={loading}
       error={error}
-      hasData={data.length}
+      hasData={data.length > 0}
     >
       <Section>
         <Subtitle>Add status</Subtitle>
@@ -60,7 +61,7 @@ const ConfigurationPage = () => {
         />
       </Section>
 
-      {data.length > 0 && (
+      {configForCurrentCommandType.length > 0 ? (
         <Section>
           <Subtitle>{currentType} statuses configuration</Subtitle>
           <ConfigurationForm
@@ -68,6 +69,8 @@ const ConfigurationPage = () => {
             updateConfig={updateConfig}
           />
         </Section>
+      ) : (
+        <Message>There are no status configs for the selected type.</Message>
       )}
     </MainTemplate>
   );

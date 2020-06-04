@@ -37,7 +37,7 @@ const StartLogAnalyzeButton = ({ onClick }) => {
       customStyles={customStyles}
       disabled={disabled}
     >
-      Start log analyze
+      Start log analysis
     </Button>
   );
 };

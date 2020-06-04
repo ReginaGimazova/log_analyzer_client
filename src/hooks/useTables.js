@@ -3,6 +3,8 @@ import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+// TODO: move to context
+
 const useTables = () => {
   const [tables, setTables] = useState([]);
   const [tablesError, setTablesError] = useState("");

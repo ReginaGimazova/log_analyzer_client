@@ -8,10 +8,10 @@ const useConfigurationData = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const updateConfig = ids => {
+  const updateConfig = statuses => {
     setLoading(true);
     axios
-      .post(`${apiUrl}/configuration`, { status_ids: ids })
+      .post(`${apiUrl}/configuration`, { statuses })
       .then(({ data }) => {
         setConfigData(data);
         setError("");
@@ -31,7 +31,7 @@ const useConfigurationData = () => {
       .post(`${apiUrl}/configuration/new`, {
         value,
         type: configType,
-        status: 1
+        mode: 1
       })
       .then(({ data }) => {
         setConfigData(data);

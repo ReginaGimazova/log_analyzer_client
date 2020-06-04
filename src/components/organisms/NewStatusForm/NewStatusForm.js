@@ -46,11 +46,23 @@ const NewStatusForm = ({ addNewStatus, configs }) => {
     setValue(event.target.value);
   };
 
+  const compareStrings = (string1, string2) =>
+    string1
+      .replace(/[^a-zA-Z 0-9]+/g, "")
+      .split(" ")
+      .join("")
+      .toLowerCase() ===
+    string2
+      .replace(/[^a-zA-Z 0-9]+/g, "")
+      .split(" ")
+      .join("")
+      .toLowerCase();
+
   const checkStatusExist = statusValue => {
     return configs.find(
       ({ value: configValue, type }) =>
-        statusValue === configValue &&
-        configType.value.toUpperCase() === type.toUpperCase()
+        compareStrings(statusValue, configValue) &&
+        compareStrings(configType.value, type)
     );
   };
 
@@ -102,7 +114,9 @@ const NewStatusForm = ({ addNewStatus, configs }) => {
           <ErrorMessage>{duplicateError}</ErrorMessage>
         </ErrorMessageWrapper>
       )}
-      <SubmitButton onClick={onSubmit}>Add status</SubmitButton>
+      <SubmitButton disabled={duplicateError} onClick={onSubmit}>
+        Add status
+      </SubmitButton>
     </Form>
   );
 };

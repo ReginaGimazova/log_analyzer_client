@@ -2,6 +2,6 @@
 // use reduce
 
 const getActiveStatuses = ({ statuses }) =>
-  statuses.filter(status => status.status === 1);
+  statuses.filter(status => status.mode === 1);
 
 export default getActiveStatuses;

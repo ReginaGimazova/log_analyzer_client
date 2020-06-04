@@ -18,51 +18,43 @@ const InputWrapper = styled.div`
 `;
 
 const ConfigurationForm = ({ configs, updateConfig }) => {
-  const [statuses, setStatuses] = useState([]);
+  const [statuses, setStatuses] = useState(configs);
 
   const handleCheck = event => {
     const { value, checked } = event.target;
 
-    const updatedCheckedFeatures = checked
-      ? [...statuses, configs.find(item => item.value === value)]
-      : statuses.filter(item => item.value !== value);
+    const updatedConfig = statuses.find(item => item.value === value);
+    const updatedCheckedStatuses = [
+      ...statuses,
+      (updatedConfig.mode = +checked)
+    ];
 
-    setStatuses(updatedCheckedFeatures);
+    setStatuses(updatedCheckedStatuses);
   };
 
   const applyConfig = useCallback(
     event => {
       event.preventDefault();
-      const ids = statuses.map(item => item.id);
-      updateConfig(ids);
+      updateConfig(statuses);
     },
     [statuses]
   );
 
   useEffect(() => {
-    setStatuses(getActiveStatuses({ statuses: configs }));
+    setStatuses(configs);
   }, [configs]);
 
-  const getCheckbox = ({ id, value }) => {
-    const isChecked = !!statuses.find(item => item.id === +id);
-
-    return (
-      <InputWrapper key={id}>
-        <Checkbox
-          checked={isChecked}
-          onChange={handleCheck}
-          value={value}
-          id={id}
-        >
-          {value}
-        </Checkbox>
-      </InputWrapper>
-    );
-  };
+  const getCheckbox = ({ id, value, mode }) => (
+    <InputWrapper key={id}>
+      <Checkbox checked={mode} onChange={handleCheck} value={value} id={id}>
+        {value}
+      </Checkbox>
+    </InputWrapper>
+  );
 
   return (
     <form>
-      {configs.map(item => getCheckbox({ id: item.id, value: item.value }))}
+      {configs.map(({ id, value, mode }) => getCheckbox({ id, value, mode }))}
       <SubmitButton onClick={applyConfig}>Apply</SubmitButton>
     </form>
   );

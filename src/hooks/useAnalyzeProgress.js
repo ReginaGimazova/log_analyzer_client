@@ -5,22 +5,17 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const useAnalyzeProgress = () => {
   const [progress, setProgress] = useState(0);
-  const [currentInterval, setCurrentInterval] = useState(0);
   const [progressError, setProgressError] = useState("");
 
   const fetchProgress = () => {
-    const interval = setInterval(() => {
-      axios
-        .get(`${apiUrl}/progress`)
-        .then(({ data }) => {
-          setProgress(data);
-        })
-        .catch(error => {
-          setProgressError(error.message);
-          clearInterval(currentInterval);
-        });
-    }, 2000);
-    setCurrentInterval(interval);
+    axios
+      .get(`${apiUrl}/progress`)
+      .then(({ data }) => {
+        setProgress(data);
+      })
+      .catch(error => {
+        setProgressError(error.message);
+      });
   };
 
   const startProgress = () => {
@@ -35,11 +30,10 @@ const useAnalyzeProgress = () => {
   };
 
   useEffect(() => {
-    if (progress === 100 || progressError) {
-      clearInterval(currentInterval);
-      setProgress(0);
+    if (progress > 0 && progress < 100) {
+      fetchProgress();
     }
-  }, [progress, progressError]);
+  }, [progress]);
 
   return { startProgress, progress, progressError };
 };

@@ -69,7 +69,7 @@ const OriginalDumpAnalyzePage = () => {
 
   return (
     <MainTemplate
-      pageTitle="Original dump analyze"
+      pageTitle="Original dump analysis"
       menuItems={menuItems}
       loading={loading}
       hasData={queries && queries.length}
