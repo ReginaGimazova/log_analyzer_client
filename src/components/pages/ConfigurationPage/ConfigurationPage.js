@@ -23,7 +23,8 @@ const ConfigurationPage = () => {
     loading,
     error,
     updateConfig,
-    addNewStatus
+    addNewStatus,
+    removeStatus
   } = useConfigurationData();
 
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
@@ -67,6 +68,8 @@ const ConfigurationPage = () => {
           <ConfigurationForm
             configs={configForCurrentCommandType}
             updateConfig={updateConfig}
+            removeStatus={removeStatus}
+            currentType={currentType}
           />
         </Section>
       ) : (

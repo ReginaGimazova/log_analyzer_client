@@ -89,7 +89,7 @@ const NewStatusForm = ({ addNewStatus, configs }) => {
       value,
       configType: configType.value
     });
-    setConfigType(configType[0]);
+    setConfigType(configTypes[0]);
     setValue("");
   };
 

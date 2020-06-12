@@ -40,8 +40,28 @@ const useConfigurationData = () => {
       })
       .catch(e => {
         setConfigData(configData);
-        console.log(e);
         setLoading(false);
+        setError(e.message);
+      });
+  };
+
+  const removeStatus = statusData => {
+    setLoading(true);
+    const { value, configType } = statusData;
+    axios
+      .post(`${apiUrl}/configuration/remove`, {
+        value,
+        type: configType
+      })
+      .then(({ data }) => {
+        setConfigData(data);
+        setLoading(false);
+        setError("");
+      })
+      .catch(e => {
+        setConfigData(configData);
+        setLoading(false);
+        setError(e.message);
       });
   };
 
@@ -61,7 +81,14 @@ const useConfigurationData = () => {
       });
   }, []);
 
-  return { data: configData, loading, error, updateConfig, addNewStatus };
+  return {
+    data: configData,
+    loading,
+    error,
+    updateConfig,
+    addNewStatus,
+    removeStatus
+  };
 };
 
 export default useConfigurationData;

@@ -5,6 +5,7 @@ import types from "./types";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+// TODO: statuses data separate for explain and profile
 const useStatusesInfoData = (chosenTables = [], analyzeType) => {
   const [statusesData, setStatusesData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,11 +33,28 @@ const useStatusesInfoData = (chosenTables = [], analyzeType) => {
       });
   };
 
+  const updateResult = () => {
+    setLoading(true);
+
+    axios
+      .post(`${apiUrl}/${fetchType}/update`)
+      .then(({ data }) => {
+        setStatusesData(data);
+        setError("");
+        setLoading(false);
+      })
+      .catch(e => {
+        setStatusesData(statusesData);
+        setError(e.message);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     getStatusesInfo();
   }, [analyzeType, page]);
 
-  return { getStatusesInfo, statusesData, error, loading };
+  return { getStatusesInfo, updateResult, statusesData, error, loading };
 };
 
 export default useStatusesInfoData;

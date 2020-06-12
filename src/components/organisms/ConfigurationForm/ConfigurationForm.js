@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { FaTimes } from "react-icons/fa";
 
 import Checkbox from "../../atoms/Checkbox";
-import getActiveStatuses from "./getActivestatuses";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 
 const InputWrapper = styled.div`
@@ -10,14 +10,35 @@ const InputWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 500px;
+  width: max-content;
   margin-right: 20px;
+  font-size: 1.2rem;
 
   &:not(:last-child) {
     margin-bottom: 10px;
   }
 `;
 
-const ConfigurationForm = ({ configs, updateConfig }) => {
+const Icon = styled.span(
+  ({ theme: { colors } }) => css`
+    display: flex;
+    margin-top: 1.25rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    color: ${colors.lightRed};
+
+    &:hover {
+      color: ${colors.red};
+    }
+  `
+);
+
+const ConfigurationForm = ({
+  configs,
+  updateConfig,
+  removeStatus,
+  currentType
+}) => {
   const [statuses, setStatuses] = useState(configs);
 
   const handleCheck = event => {
@@ -40,6 +61,10 @@ const ConfigurationForm = ({ configs, updateConfig }) => {
     [statuses]
   );
 
+  const onRemoveStatus = value => {
+    removeStatus({ value, configType: currentType });
+  };
+
   useEffect(() => {
     setStatuses(configs);
   }, [configs]);
@@ -49,6 +74,9 @@ const ConfigurationForm = ({ configs, updateConfig }) => {
       <Checkbox checked={mode} onChange={handleCheck} value={value} id={id}>
         {value}
       </Checkbox>
+      <Icon onClick={() => onRemoveStatus(value)}>
+        <FaTimes />
+      </Icon>
     </InputWrapper>
   );
 

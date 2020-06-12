@@ -8,10 +8,13 @@ const CriticalStatusesPage = () => {
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
   const [chosenTables, setChosenTables] = useState([]);
 
-  const { getStatusesInfo, loading, statusesData, error } = useStatusesInfoData(
-    chosenTables,
-    currentType
-  );
+  const {
+    getStatusesInfo,
+    updateResult,
+    loading,
+    statusesData,
+    error
+  } = useStatusesInfoData(chosenTables, currentType);
 
   const { queries = [], page, page_count: pageCount } = statusesData;
 
@@ -48,6 +51,7 @@ const CriticalStatusesPage = () => {
         onTablesChoose={onTablesChoose}
         chosenTables={chosenTables}
         reSearchQueries={getStatusesInfo}
+        updateResult={updateResult}
       />
     </MainTemplate>
   );

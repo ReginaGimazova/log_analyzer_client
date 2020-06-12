@@ -46,15 +46,25 @@ const StatusesPageSection = ({
   reSearchQueries,
   onTablesChoose,
   pageCount,
-  page
+  page,
+  updateResult
 }) => {
-  const title = `Run the command ${type} for all filtered queries`;
-  const message = "Are you sure to do this.";
+  const title = `Run the command ${type} for all filtered queries. `;
+  const message = "Are you sure to do this?";
+
+  const updateAnalyzeResult = event => {
+    event.preventDefault();
+    if (window.confirm(title + message)) {
+      updateResult();
+    }
+  };
 
   return (
     <>
       <ButtonWrapper>
-        <Button customStyles={customButtonStyles}>{type}</Button>
+        <Button customStyles={customButtonStyles} onClick={updateAnalyzeResult}>
+          {type}
+        </Button>
       </ButtonWrapper>
       <HighLightText>
         Statements with critical statuses according to the
