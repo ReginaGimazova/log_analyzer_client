@@ -69,9 +69,9 @@ const ConfigurationForm = ({
     setStatuses(configs);
   }, [configs]);
 
-  const getCheckbox = ({ id, value, mode }) => (
-    <InputWrapper key={id}>
-      <Checkbox checked={mode} onChange={handleCheck} value={value} id={id}>
+  const getCheckbox = ({ value, mode }) => (
+    <InputWrapper key={value}>
+      <Checkbox checked={mode} onChange={handleCheck} value={value}>
         {value}
       </Checkbox>
       <Icon onClick={() => onRemoveStatus(value)}>
@@ -82,7 +82,12 @@ const ConfigurationForm = ({
 
   return (
     <form>
-      {configs.map(({ id, value, mode }) => getCheckbox({ id, value, mode }))}
+      {configs.map(({ value, mode }) =>
+        getCheckbox({
+          value,
+          mode
+        })
+      )}
       <SubmitButton onClick={applyConfig}>Apply</SubmitButton>
     </form>
   );

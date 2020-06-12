@@ -12,8 +12,7 @@ const useConfigurationData = () => {
     setLoading(true);
     axios
       .post(`${apiUrl}/configuration`, { statuses })
-      .then(({ data }) => {
-        setConfigData(data);
+      .then(() => {
         setError("");
         setLoading(false);
       })
