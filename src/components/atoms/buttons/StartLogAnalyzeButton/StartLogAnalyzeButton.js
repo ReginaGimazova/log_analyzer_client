@@ -15,6 +15,10 @@ const customStyles = ({ colors, breakpoints }) => css`
     color: ${colors.white};
   }
 
+  &:disabled {
+    cursor: default;
+  }
+
   @media screen and (max-width: ${breakpoints.md}) {
     margin-top: 20px;
     width: 100%;

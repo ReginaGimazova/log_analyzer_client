@@ -26,7 +26,12 @@ const OriginalDumpAnalyzePage = () => {
     chosenTables
   );
 
-  const { startProgress, progress, progressError } = useAnalyzeProgress();
+  const {
+    startProgress,
+    fetchProgress,
+    progress,
+    progressError
+  } = useAnalyzeProgress();
 
   const { queries = [] } = data;
 
@@ -67,6 +72,10 @@ const OriginalDumpAnalyzePage = () => {
     }
   }, [progressError]);
 
+  const noDataMessageIsShown =
+    !queries.length && !loading && !error && !progressBarIsShown;
+  const contentIsShown = queries.length > 0 && !progressBarIsShown;
+
   return (
     <MainTemplate
       pageTitle="Original dump analysis"
@@ -76,9 +85,11 @@ const OriginalDumpAnalyzePage = () => {
       error={error}
       topRight={<StartLogAnalyzeButton onClick={onStartAnalyze} />}
     >
-      {progressBarIsShown && <ProgressBar percent={progress || 0} />}
+      {progressBarIsShown && (
+        <ProgressBar percent={progress || 0} fetchProgress={fetchProgress} />
+      )}
 
-      {!queries.length && !loading && !error && !progressBarIsShown && (
+      {noDataMessageIsShown && (
         <Message customStyles={customMessageStyles} withIcon>
           There is no data. Click to Start Log Analyze button or check that you
           set correct name of log file.
@@ -91,7 +102,7 @@ const OriginalDumpAnalyzePage = () => {
         </ErrorMessage>
       )}
 
-      {queries.length > 0 && (
+      {contentIsShown && (
         <SqlAnalyzeSection
           byHost={byHost}
           data={data}

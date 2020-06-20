@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 
 const BarContainer = styled.div(
@@ -19,10 +19,20 @@ const Filler = styled.div(
   `
 );
 
-const ProgressBar = ({ percent = 0 }) => (
-  <BarContainer>
-    <Filler percent={+percent} />
-  </BarContainer>
-);
+const ProgressBar = ({ percent = 0, fetchProgress }) => {
+  useEffect(() => {
+    const intervalId = setInterval(fetchProgress, 2000);
+
+    if (percent === 100) {
+      return clearInterval(intervalId);
+    }
+  }, []);
+
+  return (
+    <BarContainer>
+      <Filler percent={+percent} />
+    </BarContainer>
+  );
+};
 
 export default ProgressBar;

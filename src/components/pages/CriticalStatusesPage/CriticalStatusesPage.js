@@ -3,6 +3,7 @@ import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "../../organisms/StatusesPageSection";
 import useStatusesInfoData from "./useStatusesInfoData";
 import types from "./types";
+import ActionButton from "../../atoms/buttons/ActionButton";
 
 const CriticalStatusesPage = () => {
   const [currentType, setCurrentType] = useState(types.EXPLAIN);
@@ -17,6 +18,16 @@ const CriticalStatusesPage = () => {
   } = useStatusesInfoData(chosenTables, currentType);
 
   const { queries = [], page, page_count: pageCount } = statusesData;
+
+  const title = `Run the command ${currentType} for all filtered queries. `;
+  const message = "Are you sure to do this?";
+
+  const updateAnalyzeResult = event => {
+    event.preventDefault();
+    if (window.confirm(title + message)) {
+      updateResult();
+    }
+  };
 
   const menuItems = [
     {
@@ -42,6 +53,9 @@ const CriticalStatusesPage = () => {
       error={error}
       loading={loading}
       hasData={queries.length}
+      topRight={
+        <ActionButton actionType={currentType} action={updateAnalyzeResult} />
+      }
     >
       <StatusesPageSection
         queries={queries}

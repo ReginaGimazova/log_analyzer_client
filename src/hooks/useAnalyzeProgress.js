@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -11,7 +11,7 @@ const useAnalyzeProgress = () => {
     axios
       .get(`${apiUrl}/progress`)
       .then(({ data }) => {
-        setProgress(data);
+        setProgress(data.progress);
       })
       .catch(error => {
         setProgressError(error.message);
@@ -29,13 +29,7 @@ const useAnalyzeProgress = () => {
       });
   };
 
-  useEffect(() => {
-    if (progress > 0 && progress < 100) {
-      fetchProgress();
-    }
-  }, [progress]);
-
-  return { startProgress, progress, progressError };
+  return { startProgress, fetchProgress, progress, progressError };
 };
 
 export default useAnalyzeProgress;
