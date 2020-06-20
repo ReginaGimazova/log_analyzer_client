@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AiFillExclamationCircle } from "react-icons/all";
+import types from "../../../constants/types";
 
 const List = styled.ul`
   padding: 20px 0;
@@ -27,9 +28,12 @@ const Duration = styled.span`
   margin-left: 3px;
 `;
 
-const StatusList = ({ statuses }) => {
-  const statusesArray = [].concat(statuses);
+const StatusList = ({ statuses, type }) => {
+  let statusesArray = [].concat(statuses);
 
+  if (type === types.PROFILE && statuses[0] === "[") {
+    statusesArray = JSON.parse(statuses);
+  }
   return (
     <List>
       {statusesArray.map((status, index) => (
@@ -37,10 +41,10 @@ const StatusList = ({ statuses }) => {
           <Icon>
             <AiFillExclamationCircle />
           </Icon>
-          {status}
-          {/*
-          {duration && <Duration>- Duration: {duration}</Duration>}
-*/}
+          {status?.status || status}
+          {status?.duration && (
+            <Duration>- Duration: {status.duration}</Duration>
+          )}
         </Item>
       ))}
     </List>

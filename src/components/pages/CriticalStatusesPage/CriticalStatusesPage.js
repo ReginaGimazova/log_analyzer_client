@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "../../organisms/StatusesPageSection";
 import useStatusesInfoData from "./useStatusesInfoData";
-import types from "./types";
+import types from "../../../constants/types";
 import ActionButton from "../../atoms/buttons/ActionButton";
 
 const CriticalStatusesPage = () => {

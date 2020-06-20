@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { parse } from "query-string";
 import axios from "axios";
-import types from "./types";
+import types from "../../../constants/types";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
