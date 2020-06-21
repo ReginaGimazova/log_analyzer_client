@@ -59,6 +59,7 @@ const ConfigurationPage = () => {
         <NewStatusForm
           addNewStatus={addNewStatus}
           configs={configForCurrentCommandType}
+          currentType={currentType}
         />
       </Section>
 

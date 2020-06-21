@@ -16,7 +16,7 @@ const SqlAnalyzeSection = ({
   chosenTables,
   reSearchQueries
 }) => {
-  const { queries, page_count: pageCount, page } = data;
+  const { queries, pageCount, page } = data;
 
   return (
     <Section>

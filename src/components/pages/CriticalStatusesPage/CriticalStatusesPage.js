@@ -17,7 +17,7 @@ const CriticalStatusesPage = () => {
     error
   } = useStatusesInfoData(chosenTables, currentType);
 
-  const { queries = [], page, page_count: pageCount } = statusesData;
+  const { queries = [], page, pageCount } = statusesData;
 
   const title = `Run the command ${currentType} for all filtered queries. `;
   const message = "Are you sure to do this?";

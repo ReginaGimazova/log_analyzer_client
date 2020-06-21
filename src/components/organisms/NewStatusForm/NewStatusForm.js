@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import styled, { css } from "styled-components";
 import Input from "../../atoms/Input";
@@ -26,7 +26,7 @@ const ErrorMessageWrapper = styled.div`
 
 const duplicationErrorMessage = "This status already exists";
 
-const NewStatusForm = ({ addNewStatus, configs }) => {
+const NewStatusForm = ({ addNewStatus, configs, currentType }) => {
   const configTypes = [
     {
       value: "Explain",
@@ -92,6 +92,12 @@ const NewStatusForm = ({ addNewStatus, configs }) => {
     setConfigType(configTypes[0]);
     setValue("");
   };
+
+  useEffect(() => {
+    setConfigType(
+      configTypes.find(type => type.value.toUpperCase() === currentType)
+    );
+  }, [currentType]);
 
   return (
     <Form>
