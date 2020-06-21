@@ -10,7 +10,8 @@ const customStyles = ({ colors, breakpoints }) => css`
   font-weight: bold;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:disabled {
     background-color: ${colors.red};
     color: ${colors.white};
   }
