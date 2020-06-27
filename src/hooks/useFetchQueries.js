@@ -16,7 +16,7 @@ const useFetchQueries = ({ tables, byHost }) => {
 
     axios
       .get(
-        `${apiUrl}/queries?byHost=${byHost}&search_tables=${tableParams}&page=${page}`
+        `${apiUrl}/queries?byHost=${byHost}&searchTables=${tableParams}&page=${page}`
       )
       .then(({ data }) => {
         setQueriesData(data);

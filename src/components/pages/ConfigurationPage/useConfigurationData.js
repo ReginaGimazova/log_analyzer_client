@@ -11,7 +11,7 @@ const useConfigurationData = () => {
   const updateConfig = statuses => {
     setLoading(true);
     axios
-      .post(`${apiUrl}/configuration`, { statuses })
+      .post(`${apiUrl}/configuration/update`, { statuses })
       .then(() => {
         setError("");
         setLoading(false);
@@ -27,7 +27,7 @@ const useConfigurationData = () => {
     setLoading(true);
     const { value, configType } = statusData;
     axios
-      .post(`${apiUrl}/configuration/new`, {
+      .post(`${apiUrl}/configuration/add`, {
         value,
         type: configType,
         mode: 1

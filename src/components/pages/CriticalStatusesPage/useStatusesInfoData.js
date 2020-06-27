@@ -19,7 +19,7 @@ const useStatusesInfoData = (chosenTables = [], analyzeType) => {
     setLoading(true);
 
     axios
-      .get(`${apiUrl}/${fetchType}?page=${page}&search_tables=${tableParams}`)
+      .get(`${apiUrl}/${fetchType}?page=${page}&searchTables=${tableParams}`)
       .then(({ data }) => {
         setStatusesData(data);
         setError("");
