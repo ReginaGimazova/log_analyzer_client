@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import apiUrl from "../config";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 // TODO: move to context
 

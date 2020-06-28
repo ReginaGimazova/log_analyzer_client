@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import { parse } from "query-string";
 import axios from "axios";
-import apiUrl from "../config";
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const useFetchQueries = ({ tables, byHost }) => {
   const [queriesData, setQueriesData] = useState(null);
