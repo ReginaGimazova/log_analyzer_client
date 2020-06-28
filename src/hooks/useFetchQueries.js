@@ -1,13 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { parse } from "query-string";
 import axios from "axios";
+import apiUrl from "../config";
 
 const useFetchQueries = ({ tables, byHost }) => {
   const [queriesData, setQueriesData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const apiUrl = process.env.REACT_APP_API_URL;
   const { page = 1 } = parse(window.location.search);
 
   const getQueries = useCallback(() => {

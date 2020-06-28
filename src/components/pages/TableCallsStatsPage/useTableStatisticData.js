@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import apiUrl from "../../../config";
 
 const useTableStatisticData = () => {
   const [tableData, setTableData] = useState([]);
