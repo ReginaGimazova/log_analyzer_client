@@ -48,17 +48,6 @@ const PaginationAction = styled.span(
   `
 );
 
-const Ellipsis = styled.span(
-  ({ theme: { colors } }) => css`
-    display: flex;
-    justify-content: flex-end;
-    height: 100%;
-    align-items: flex-end;
-
-    ${commonStyles({ colors })}
-  `
-);
-
 const Pagination = ({ pageCount, page: currentPage }) => {
   const pagesArray = new Array(pageCount).fill(0).map((x, i) => i + 1);
 

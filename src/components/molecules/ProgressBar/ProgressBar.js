@@ -20,6 +20,7 @@ const Filler = styled.div(
 );
 
 const ProgressBar = ({ percent = 0, fetchProgress }) => {
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     const intervalId = setInterval(fetchProgress, 2000);
 

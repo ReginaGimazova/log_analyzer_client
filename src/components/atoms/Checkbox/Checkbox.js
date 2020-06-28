@@ -21,7 +21,7 @@ const DefaultCheckbox = styled.input(
 
     + span {
       background-color: transparent;
-      border: 0.0625rem solid #adadad;
+      border: 0.0625rem solid ${colors.grey};
     }
   `
 );
