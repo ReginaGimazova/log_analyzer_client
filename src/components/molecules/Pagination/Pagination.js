@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { parse } from "query-string";
 import styled, { css } from "styled-components";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import Popover from "../Popover";
 
 const PaginationWrapper = styled.div`
   width: max-content;
@@ -10,10 +12,21 @@ const PaginationWrapper = styled.div`
   margin: 100px auto 50px auto;
 `;
 
+const PaginationList = styled.div(
+  ({ theme: { colors }, rowCount }) => css`
+    display: grid;
+    grid-template-columns: repeat(${rowCount}, 1fr);
+    background-color: ${colors.lightGrey};
+  `
+);
+
 const commonStyles = ({ colors, active = false }) => css`
   display: flex;
   align-items: center;
   height: 44px;
+  width: 44px;
+  justify-content: center;
+  cursor: pointer;
 
   background-color: ${active ? colors.green : colors.lightGrey};
 
@@ -48,12 +61,22 @@ const PaginationAction = styled.span(
   `
 );
 
-const Pagination = ({ pageCount, page: currentPage }) => {
-  const pagesArray = new Array(pageCount).fill(0).map((x, i) => i + 1);
+const Pagination = ({ pageCount, page: currentPage, isStatusesPage }) => {
+  const { byHost, explain } = parse(window.location.search);
 
-  const pageItems = pagesArray.map(page => (
+  const pagesArray = new Array(pageCount).fill(0).map((x, i) => i + 1);
+  const manyPages = pagesArray.length >= 4;
+
+  const firstPages = manyPages ? [1, 2, 3] : pagesArray;
+  const otherPages = pagesArray.slice(3, pagesArray.length);
+
+  const [paginationPopoverShown, setPaginationPopoverShown] = useState(false);
+
+  const linkTarget = isStatusesPage ? `explain=${explain}` : `byHost=${byHost}`;
+
+  const pageItems = firstPages.map(page => (
     <PaginationItem active={+currentPage === page}>
-      <Link to={`?page=${page}`}>
+      <Link to={`?${linkTarget}&page=${page}`}>
         <Item>{page}</Item>
       </Link>
     </PaginationItem>
@@ -62,6 +85,21 @@ const Pagination = ({ pageCount, page: currentPage }) => {
   if (pageCount <= 1) {
     return null;
   }
+
+  const PaginationPopover = () => (
+    <PaginationList rowCount={otherPages.length > 4 ? 4 : otherPages.length}>
+      {otherPages.map(page => (
+        <PaginationItem active={+currentPage === page}>
+          <Link
+            to={`?byHost=${byHost}&page=${page}`}
+            onClick={() => setPaginationPopoverShown(false)}
+          >
+            <Item>{page}</Item>
+          </Link>
+        </PaginationItem>
+      ))}
+    </PaginationList>
+  );
 
   return (
     <PaginationWrapper>
@@ -74,6 +112,24 @@ const Pagination = ({ pageCount, page: currentPage }) => {
       </PaginationAction>
 
       {pageItems}
+
+      {manyPages && (
+        <Popover
+          reference={
+            <PaginationItem
+              onClick={() => setPaginationPopoverShown(!paginationPopoverShown)}
+            >
+              ...
+            </PaginationItem>
+          }
+          visible={paginationPopoverShown}
+          content={<PaginationPopover />}
+          colorTheme="light"
+          onClickOutside={() => setPaginationPopoverShown(false)}
+          placement="top"
+          zindex={4}
+        />
+      )}
 
       <PaginationAction disable={currentPage === pageCount}>
         <Link to={`?page=${currentPage + 1}`}>

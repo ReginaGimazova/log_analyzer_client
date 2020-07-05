@@ -7,10 +7,10 @@ const AsideMenu = () => {
   return (
     <AsideMenuWrapper>
       <Menu pageWrapId="page-wrap" outerContainerId="outer-container">
-        <Link to="/" activeclassname="active">
+        <Link to="/?byHost=false" activeclassname="active">
           Original dump analyze
         </Link>
-        <Link to="/critical-statuses" activeclassname="active">
+        <Link to="/critical-statuses?explain=true" activeclassname="active">
           Critical statuses
         </Link>
         <Link to="/tables" activeclassname="active">

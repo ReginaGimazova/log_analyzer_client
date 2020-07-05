@@ -30,7 +30,7 @@ const SqlAnalyzeSection = ({
         {byHost ? "SQL and User Host" : "SQL"}{" "}
       </Subtitle>
       <QueriesList isAnalyzerPage queries={queries} />
-      <Pagination pageCount={pageCount} page={page} />
+      <Pagination pageCount={pageCount} page={page} isStatusesPage={false} />
     </Section>
   );
 };

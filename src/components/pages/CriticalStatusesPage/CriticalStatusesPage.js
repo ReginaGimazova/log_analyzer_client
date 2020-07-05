@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { parse } from "query-string";
+
 import MainTemplate from "../../templates/MainTemplate";
 import StatusesPageSection from "../../organisms/StatusesPageSection";
 import useStatusesInfoData from "./useStatusesInfoData";
@@ -6,7 +8,9 @@ import types from "../../../constants/types";
 import ActionButton from "../../atoms/buttons/ActionButton";
 
 const CriticalStatusesPage = () => {
-  const [currentType, setCurrentType] = useState(types.EXPLAIN);
+  const { explain = "true" } = parse(window.location.search);
+
+  const currentType = explain === "true" ? types.EXPLAIN : types.PROFILE;
   const [chosenTables, setChosenTables] = useState([]);
 
   const {
@@ -33,12 +37,12 @@ const CriticalStatusesPage = () => {
     {
       title: "Show Explain statuses",
       active: currentType === types.EXPLAIN,
-      onClick: () => setCurrentType(types.EXPLAIN)
+      to: `?explain=${true}`
     },
     {
       title: "Show Profile statuses",
       active: currentType === types.PROFILE,
-      onClick: () => setCurrentType(types.PROFILE)
+      to: `?explain=${false}`
     }
   ];
 

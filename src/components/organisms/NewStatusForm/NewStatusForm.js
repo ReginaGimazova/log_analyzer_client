@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import styled, { css } from "styled-components";
 import Input from "../../atoms/Input";
-import selectCustomStyles from "../../../static/styles/customStyles";
+import selectCustomStyles from "../../../public/styles/customStyles";
 import SubmitButton from "../../atoms/buttons/SubmitButton";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 

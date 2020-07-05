@@ -44,7 +44,7 @@ const StatusesPageSection = ({
       {queries.length > 0 && (
         <>
           <QueriesList isAnalyzerPage={false} queries={queries} type={type} />
-          <Pagination pageCount={pageCount} page={page} />
+          <Pagination pageCount={pageCount} page={page} isStatusesPage />
         </>
       )}
     </>

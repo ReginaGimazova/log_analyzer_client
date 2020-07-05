@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
-import Button from "../../atoms/buttons/Button";
+import { Link } from "react-router-dom";
 
 const Navigation = styled.div`
   display: flex;
@@ -15,8 +14,20 @@ const Navigation = styled.div`
   }
 `;
 
-const NavigationButton = styled(Button)(
-  ({ theme: { breakpoints, colors } }) => css`
+const NavigationItem = styled.span(
+  ({ theme: { breakpoints, colors }, active }) => css`
+    width: max-content;
+    min-width: 150px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    background-color: ${active ? colors.lightGrey : colors.white};
+    color: ${colors.darkGrey};
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: ${active ? "bold" : "normal"};
+    transition: all 0.8s ease;
+    text-transform: uppercase;
+
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -38,14 +49,16 @@ const NavigationButton = styled(Button)(
   `
 );
 
-const NavigationMenu = ({ menuItems }) => (
-  <Navigation>
-    {menuItems.map(({ title, onClick, active }, index) => (
-      <NavigationButton key={index} onClick={onClick} active={active}>
-        {title}
-      </NavigationButton>
-    ))}
-  </Navigation>
-);
+const NavigationMenu = ({ menuItems }) => {
+  return (
+    <Navigation>
+      {menuItems.map(({ title, active, to }, index) => (
+        <NavigationItem key={index} active={active}>
+          <Link to={to}>{title}</Link>
+        </NavigationItem>
+      ))}
+    </Navigation>
+  );
+};
 
 export default NavigationMenu;

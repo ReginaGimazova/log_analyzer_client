@@ -2,8 +2,8 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
-import theme from "./static/styles/theme";
-import GlobalStyle from "./static/styles/globalStyles";
+import theme from "./public/styles/theme";
+import GlobalStyle from "./public/styles/globalStyles";
 import OriginalDumpAnalyzePage from "./components/pages/OriginalDumpAnalyzePage";
 import CriticalStatusesPage from "./components/pages/CriticalStatusesPage";
 import TableCallsStatsPage from "./components/pages/TableCallsStatsPage";

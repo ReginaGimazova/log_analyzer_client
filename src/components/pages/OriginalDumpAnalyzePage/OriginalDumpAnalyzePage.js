@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { css } from "styled-components";
+import { parse } from "query-string";
 
 import MainTemplate from "../../templates/MainTemplate";
 import SqlAnalyzeSection from "../../organisms/SqlAnalyzeSection";
@@ -17,7 +18,9 @@ const customMessageStyles = css`
 `;
 
 const OriginalDumpAnalyzePage = () => {
-  const [byHost, setByHost] = useState(false);
+  const { byHost: byHostQuery = "false" } = parse(window.location.search);
+  const byHost = byHostQuery === "true";
+
   const [chosenTables, setChosenTables] = useState([]);
   const [progressBarIsShown, setProgressBarIsShown] = useState(false);
 
@@ -38,13 +41,13 @@ const OriginalDumpAnalyzePage = () => {
   const menuItems = [
     {
       title: "grouped by sql",
-      active: !byHost,
-      onClick: () => setByHost(false)
+      active: byHostQuery === "false",
+      to: `?byHost=${false}`
     },
     {
       title: "grouped by sql and user host",
-      active: byHost,
-      onClick: () => setByHost(true)
+      active: byHostQuery === "true",
+      to: `?byHost=${true}`
     }
   ];
 
