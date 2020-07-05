@@ -16,7 +16,7 @@ const AsideMenu = () => {
         <Link to="/tables" activeclassname="active">
           Table calls stats
         </Link>
-        <Link to="/configuration" activeclassname="active">
+        <Link to="/configuration?explain=true" activeclassname="active">
           Сonfiguration
         </Link>
       </Menu>

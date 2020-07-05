@@ -32,7 +32,7 @@ const StatusesPageSection = ({
     <>
       <HighLightText>
         Statements with critical statuses according to the
-        <Link to="configuration">configuration</Link>
+        <Link to="configuration?explain=true">configuration</Link>
       </HighLightText>
 
       <TableSearch

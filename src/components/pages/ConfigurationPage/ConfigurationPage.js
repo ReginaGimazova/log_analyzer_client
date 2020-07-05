@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
+import { parse } from "query-string";
 
 import MainTemplate from "../../templates/MainTemplate";
 import ConfigurationForm from "../../organisms/ConfigurationForm";
@@ -27,18 +28,19 @@ const ConfigurationPage = () => {
     removeStatus
   } = useConfigurationData();
 
-  const [currentType, setCurrentType] = useState(types.EXPLAIN);
+  const { explain = "true" } = parse(window.location.search);
+  const currentType = explain === "true" ? types.EXPLAIN : types.PROFILE;
 
   const menuItems = [
     {
       title: "Explain statuses",
       active: currentType === types.EXPLAIN,
-      onClick: () => setCurrentType(types.EXPLAIN)
+      to: `?explain=${true}`
     },
     {
       title: "Profile statuses",
       active: currentType === types.PROFILE,
-      onClick: () => setCurrentType(types.PROFILE)
+      to: `?explain=${false}`
     }
   ];
 
