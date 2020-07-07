@@ -31,10 +31,6 @@ const ConfigurationPage = () => {
     removeStatus
   } = useConfigurationData();
 
-  if (error && !loading) {
-    return <ErrorPage>{error}</ErrorPage>;
-  }
-
   const { explain = "true" } = parse(window.location.search);
   const currentType = explain === "true" ? types.EXPLAIN : types.PROFILE;
 
@@ -52,8 +48,12 @@ const ConfigurationPage = () => {
   ];
 
   const configForCurrentCommandType = useMemo(() => {
-    return data.filter(status => status.type === currentType);
+    return data?.filter(status => status.type === currentType);
   }, [currentType, data]);
+
+  if (error && !loading) {
+    return <ErrorPage>{error}</ErrorPage>;
+  }
 
   if (loading && !data.length) {
     return (
