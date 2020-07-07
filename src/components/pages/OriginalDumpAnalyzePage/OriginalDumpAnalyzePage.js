@@ -7,10 +7,12 @@ import SqlAnalyzeSection from "../../organisms/SqlAnalyzeSection";
 import StartLogAnalyzeButton from "../../atoms/buttons/StartLogAnalyzeButton";
 import useAnalyzeProgress from "../../../hooks/useAnalyzeProgress";
 import ProgressBar from "../../molecules/ProgressBar";
-
 import useOriginDumpAnalyzeData from "./useOriginDumpAnalyzeData";
 import Message from "../../atoms/Message";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
+import ErrorPage from "../ErrorPage";
+import DefaultTemplate from "../../templates/DefaultTemplate";
+import Loader from "../../molecules/loaders/Loader";
 
 const customMessageStyles = css`
   margin-top: 50px;
@@ -78,6 +80,18 @@ const OriginalDumpAnalyzePage = () => {
   const noDataMessageIsShown =
     !queries.length && !loading && !error && !progressBarIsShown;
   const contentIsShown = queries.length > 0 && !progressBarIsShown;
+
+  if (error && !loading) {
+    return <ErrorPage>{error}</ErrorPage>;
+  }
+
+  if (loading && !data?.queries?.length) {
+    return (
+      <DefaultTemplate>
+        <Loader />
+      </DefaultTemplate>
+    );
+  }
 
   return (
     <MainTemplate

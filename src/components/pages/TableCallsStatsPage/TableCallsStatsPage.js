@@ -4,9 +4,23 @@ import useTableStatisticData from "./useTableStatisticData";
 import TableStats from "../../molecules/TableStats";
 import ErrorMessage from "../../atoms/ErrorMessage/ErrorMessage";
 import Loader from "../../molecules/loaders/Loader";
+import ErrorPage from "../ErrorPage";
+import DefaultTemplate from "../../templates/DefaultTemplate";
 
 const TableCallsStatsPage = () => {
   const { data, loading, error } = useTableStatisticData();
+
+  if (error && !loading) {
+    return <ErrorPage>{error}</ErrorPage>;
+  }
+
+  if (loading && !data.length) {
+    return (
+      <DefaultTemplate>
+        <Loader />
+      </DefaultTemplate>
+    );
+  }
 
   return (
     <MainTemplate pageTitle="Table calls stats">

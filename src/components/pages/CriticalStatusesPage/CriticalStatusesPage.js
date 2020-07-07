@@ -6,6 +6,9 @@ import StatusesPageSection from "../../organisms/StatusesPageSection";
 import useStatusesInfoData from "./useStatusesInfoData";
 import types from "../../../constants/types";
 import ActionButton from "../../atoms/buttons/ActionButton";
+import ErrorPage from "../ErrorPage";
+import Loader from "../../molecules/loaders/Loader";
+import DefaultTemplate from "../../templates/DefaultTemplate";
 
 const CriticalStatusesPage = () => {
   const { explain = "true" } = parse(window.location.search);
@@ -49,6 +52,18 @@ const CriticalStatusesPage = () => {
   const onTablesChoose = currentTables => {
     setChosenTables(currentTables || []);
   };
+
+  if (error && !loading) {
+    return <ErrorPage>{error}</ErrorPage>;
+  }
+
+  if (loading && !statusesData.length) {
+    return (
+      <DefaultTemplate>
+        <Loader />
+      </DefaultTemplate>
+    );
+  }
 
   return (
     <MainTemplate

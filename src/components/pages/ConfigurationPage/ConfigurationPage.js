@@ -8,6 +8,9 @@ import useConfigurationData from "./useConfigurationData";
 import Subtitle from "../../atoms/Subtitle/Subtitle";
 import NewStatusForm from "../../organisms/NewStatusForm";
 import Message from "../../atoms/Message";
+import ErrorPage from "../ErrorPage";
+import DefaultTemplate from "../../templates/DefaultTemplate";
+import Loader from "../../molecules/loaders/Loader";
 
 const Section = styled.section`
   margin: 50px 0;
@@ -47,6 +50,18 @@ const ConfigurationPage = () => {
   const configForCurrentCommandType = useMemo(() => {
     return data.filter(status => status.type === currentType);
   }, [currentType, data]);
+
+  if (error && !loading) {
+    return <ErrorPage>{error}</ErrorPage>;
+  }
+
+  if (loading && !data.length) {
+    return (
+      <DefaultTemplate>
+        <Loader />
+      </DefaultTemplate>
+    );
+  }
 
   return (
     <MainTemplate
