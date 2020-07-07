@@ -77,7 +77,7 @@ const StatusList = ({ statuses, type }) => {
 
   return (
     <List>
-      {statusesArray.map((status, index) => (
+      {statusesArray?.map((status, index) => (
         <>
           <Item
             key={index}

@@ -57,7 +57,7 @@ const TableStats = ({ data, theme }) => {
         </TableCell>
       </Head>
       <TBody desc={desc}>
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <Row even={index % 2 === 0} key={index}>
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.call_count}</TableCell>
@@ -86,7 +86,7 @@ const TableStats = ({ data, theme }) => {
         />
         <Tooltip cursor={{ fill: theme.colors.lightGrey }} />
         <Bar dataKey="call_count">
-          {data.map((table, index) => (
+          {data?.map((table, index) => (
             <Cell
               key={index}
               fill={index % 2 === 0 ? theme.colors.darkGrey : theme.colors.grey}

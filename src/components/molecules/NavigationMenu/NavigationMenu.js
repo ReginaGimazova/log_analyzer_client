@@ -52,7 +52,7 @@ const NavigationItem = styled.span(
 const NavigationMenu = ({ menuItems }) => {
   return (
     <Navigation>
-      {menuItems.map(({ title, active, to }, index) => (
+      {menuItems?.map(({ title, active, to }, index) => (
         <NavigationItem key={index} active={active}>
           <Link to={to}>{title}</Link>
         </NavigationItem>

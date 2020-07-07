@@ -40,7 +40,7 @@ const QueriesList = ({ queries, isAnalyzerPage, type }) => {
         <span>{queries.length} Queries</span>
         {isAnalyzerPage && <span>Execution counts</span>}
       </ListHeader>
-      {queries.map(
+      {queries?.map(
         (
           {
             query_count: queryCount,

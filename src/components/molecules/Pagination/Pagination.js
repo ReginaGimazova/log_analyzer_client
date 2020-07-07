@@ -74,7 +74,7 @@ const Pagination = ({ pageCount, page: currentPage, isStatusesPage }) => {
 
   const linkTarget = isStatusesPage ? `explain=${explain}` : `byHost=${byHost}`;
 
-  const pageItems = firstPages.map(page => (
+  const pageItems = firstPages?.map(page => (
     <PaginationItem active={+currentPage === page} key={page}>
       <Link to={`?${linkTarget}&page=${page}`}>
         <Item>{page}</Item>
@@ -88,7 +88,7 @@ const Pagination = ({ pageCount, page: currentPage, isStatusesPage }) => {
 
   const PaginationPopover = () => (
     <PaginationList rowCount={otherPages.length > 4 ? 4 : otherPages.length}>
-      {otherPages.map(page => (
+      {otherPages?.map(page => (
         <PaginationItem active={+currentPage === page} key={page}>
           <Link
             to={`?byHost=${byHost}&page=${page}`}

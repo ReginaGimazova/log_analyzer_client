@@ -82,7 +82,7 @@ const ConfigurationForm = ({
 
   return (
     <form>
-      {configs.map(({ value, mode }) =>
+      {configs?.map(({ value, mode }) =>
         getCheckbox({
           value,
           mode
