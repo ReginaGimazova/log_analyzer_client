@@ -77,13 +77,13 @@ const OriginalDumpAnalyzePage = () => {
     }
   }, [progressError]);
 
-  const noDataMessageIsShown =
-    !queries.length && !loading && !error && !progressBarIsShown;
-  const contentIsShown = queries.length > 0 && !progressBarIsShown;
-
   if (error && !loading) {
     return <ErrorPage>{error}</ErrorPage>;
   }
+
+  const noDataMessageIsShown =
+    !queries.length && !loading && !error && !progressBarIsShown;
+  const contentIsShown = queries.length > 0 && !progressBarIsShown;
 
   if (loading && !data?.queries?.length) {
     return (
