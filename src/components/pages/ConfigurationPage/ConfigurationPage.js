@@ -48,7 +48,7 @@ const ConfigurationPage = () => {
   ];
 
   const configForCurrentCommandType = useMemo(() => {
-    if (data) {
+    if (data && data.length) {
       return data.filter(status => status.type === currentType);
     }
     return [];
