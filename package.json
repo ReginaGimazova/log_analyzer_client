@@ -27,7 +27,7 @@
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
-    "build": "react-scripts build --minify=false",
+    "build": "react-scripts build --production",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix --ext .js src",
