@@ -1,5 +1,7 @@
 # Bottleneck search
 
+Application http://query-log-analyzer.herokuapp.com
+
 ## Available Scripts
 
 #### `yarn` - install dependencies
