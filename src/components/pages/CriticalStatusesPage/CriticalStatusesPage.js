@@ -76,16 +76,18 @@ const CriticalStatusesPage = () => {
         <ActionButton actionType={currentType} action={updateAnalyzeResult} />
       }
     >
-      <StatusesPageSection
-        queries={queries}
-        type={currentType}
-        page={page}
-        pageCount={pageCount}
-        onTablesChoose={onTablesChoose}
-        chosenTables={chosenTables}
-        reSearchQueries={getStatusesInfo}
-        updateResult={updateResult}
-      />
+      {queries && (
+        <StatusesPageSection
+          queries={queries}
+          type={currentType}
+          page={page}
+          pageCount={pageCount}
+          onTablesChoose={onTablesChoose}
+          chosenTables={chosenTables}
+          reSearchQueries={getStatusesInfo}
+          updateResult={updateResult}
+        />
+      )}
     </MainTemplate>
   );
 };
