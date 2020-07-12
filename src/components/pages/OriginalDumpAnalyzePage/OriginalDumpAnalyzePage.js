@@ -65,9 +65,15 @@ const OriginalDumpAnalyzePage = () => {
   };
 
   useEffect(() => {
+    fetchProgress();
+  }, []);
+
+  useEffect(() => {
     if (progress === 100) {
       setProgressBarIsShown(false);
       getQueries();
+    } else if (progress > 0 && progress < 100) {
+      setProgressBarIsShown(true);
     }
   }, [progress]);
 
